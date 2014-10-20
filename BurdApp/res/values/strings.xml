@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">BurdApp</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+	<!-- Language variables -->
+	<string name="list_of_orders">आर्डर</string>
+	<string name="list_of_farmers">किसान</string>
+	<string name="farmer_registration">किसान का पंजीकरण</string>
+	<string name="add_new_farmers">नया किसान जोड़े</string>
+	
+	<!-- Inside new_farmer_registration.xml -->
+	<string name="personal_details">व्यक्तिगत जानकारी</string>
+	<string name="full_name">पूरा नाम</string>
+	<string name="contact_details">संपर्क विवरण</string>
+	<string name="address">पता</string>
+	<string name="street_name">गली का पता</string>
+	<string name="landmark">किस के नज़दीक?</string>
+	<string name="city">शहर</string>
+	<string name="state">राज्य</string>
+	<string name="pincode">पिन कोड</string>
+	<string name="item_and_quantity">दर और मात्रा</string>
+	<string name="kernel">चुल्लू बादाम</string>
+	<string name="kilo">किलो</string>
+	<string name="seed">चुल्लू बीज</string>
+	<string name="fruit">चुल्लू फल</string>
+	<string name="accept">स्वीकार</string>
+	<string name="reject">रद</string>
+	<!-- confirmation message for choosing yes or no  -->
+	<string name="accept_confirmation_msg">क्या आप किसान को जोड़ना चाहते है ?</string>
+	<string name="accept_confirmation_for_edit_msg">क्या आप अपनी जानकारी बदलना चाहते है ?</string>
+	<string name="reject_confirmation_msg">क्या आप रद करना चाहते है ?</string>
+	<string name="reject_confirmation_for_edit_msg">क्या आप पीछे जाना चाहते है ?</string>
+	<string name="yes">हाँ</string>
+	<string name="no">नहीं</string>
+	<string name="mandatory_field">जरुरी है</string>
+	<string name="change_it">बदल दें</string>
+	<string name="confirm_it">पुष्टि करें</string>
+	<string name="no_change">क्या आप कोई बदलाव नहीं करना चाहते ?</string>
+	<string name="farmer_added_successfully">किसान जुड़ गया है।</string>
+	<string name="farmer_not_added">किसान नहीं जुड़ा है। फिरसे प्रयास करे</string>
+	<string name="farmer_updated_successfully">किसान की जानकारी बदल दी गयीं हैं</string>
+	<string name="farmer_not_updated">किसान की जानकारी बदली नहीं गयी हैं</string>
+	
+	<string-array name="tel_array">
+        <item>मोबाइल</item>
+        <item>लैंडलाइन</item>        
+    </string-array>
+    
+	<!-- ///////////string of farmer_details_page.xml and FarmerDetailsPage.java //////////////-->
+	
+	<string name="available_quantities">उपलब्ध मात्रा</string>
+	<string name="fkernel">गिरी</string>
+	<string name="fseed">बीज</string>
+	<string name="ffruit">फल</string>
+	<string name="last_transactions">पिछला हिसाब</string>
+	<string name="order_id">आर्डर क्रमांक</string>
+	<string name="payment">भुगतान</string>
+	<string name="mobile">मोबाइल</string>
+	<string name="home_address">घर का पता</string>
+	
+	
+	<!-- Order related -->
+	<string name="new_order">Naya order</string>
+	<string name="order_name">Order</string>
+	<string name="order_quantity">Matra</string>
+	<string name="order_price">dar/rate</string>
+	<string name="order_type">Chullu</string>
+	<string name="order_delivery_date">Pahunch ki tarik</string>
+	<string name="order_total">Kul Rashi</string>
+	<string name="available_quantity">Uplabdh Matra</string>
+	<string name="accept_confirmation_for_order_msg">Kya aap is order ko swiikar karna chahte hain?</string>
+	<string name="reject_confirmation_for_order_msg">Kya aap is order ko radh karna chahte hain?</string>
+	
+	
+	<!-- edit_menu_action.xml -->
+	<string name="action_edit">order kramank</string>
+	
+	<!-- HomeActivity.java -->	
+    <string-array name="month_array">
+          <item>जनवरी </item>
+			 <item>फ़रवरी</item>
+			 <item>मार्च </item>
+			 <item>अप्रैल</item>
+			 <item>मई </item>
+			 <item>जून </item>
+			 <item>जुलाई</item>
+			 <item>अगस्त </item>
+			 <item>सितंबर 	</item>
+			 <item>अक्टूबर</item>
+			 <item>नवंबर</item>
+			 <item>दिसम्बर</item>        
+    </string-array>
+</resources>
