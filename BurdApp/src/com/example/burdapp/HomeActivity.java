@@ -227,6 +227,7 @@ public class HomeActivity extends Activity implements OnClickListener{
 			}else{
 				prgDialog.hide();
 				Toast.makeText(getApplicationContext(), "No new records to check", Toast.LENGTH_LONG).show();
+				startActivity(new Intent(getApplicationContext(),DisplayOrders.class));
 			}
 				
 		}

@@ -54,6 +54,7 @@ public class applicationConstants {
 	  public static final String FARMER_SEED="farmer_seed";
 	  public static final String FARMER_KERNEL="farmer_kernel";
 	  public static final String FARMER_FRUIT="farmer_fruit";
+	  public static final String FARMER_PULP="farmer_pulp";
 	 // public static final String FARMER_TRAVEL_COST= "farmer_travel_cost";
 	  public static final String FARMER_CREATED_ON ="farmer_created_on"  ;
 	  public static final String FARMER_STREET= "farmer_street";

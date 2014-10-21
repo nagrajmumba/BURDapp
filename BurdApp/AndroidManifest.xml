@@ -90,6 +90,34 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.example.burdapp.ConfirmedOrder"
+            android:label="@string/app_name"
+            android:parentActivityName="com.example.burdapp.Farmers" 
+            android:noHistory="true"
+             >
+            
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.burdapp.Farmers" />
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.example.burdapp.AssignFarmers"
+            android:label="@string/app_name"
+            android:parentActivityName="com.example.burdapp.Farmers" 
+            android:noHistory="true"
+             >
+            
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.burdapp.Farmers" />
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

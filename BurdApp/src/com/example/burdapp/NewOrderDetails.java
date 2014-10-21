@@ -32,7 +32,7 @@ public class NewOrderDetails extends Activity implements OnClickListener{
 	String order_id;
 	Database db;
 	ProgressDialog prgDialog;
-	TextView orderName, orderType, orderQuantity, orderPrice, orderDelivery;
+	TextView orderName, orderType, orderQuantity, orderPrice, orderDelivery, availableQuantity;
 	Button btnAccept, btnReject;
 	@Override
 	  protected void onCreate(Bundle savedInstanceState) {
@@ -43,13 +43,16 @@ public class NewOrderDetails extends Activity implements OnClickListener{
 		order_id = b.getString(applicationConstants.ORDER_ID);
 		//Toast.makeText(this, order_id+" yes yes yes", Toast.LENGTH_SHORT).show();
 		ArrayList<Object> o_Details = db.getOrderById(order_id);
-		Toast.makeText(this, (CharSequence) o_Details.get(1), Toast.LENGTH_SHORT).show();
+		
+		String total = db.getTotalAvailableQuantity(o_Details.get(6).toString());
+		
+		//Toast.makeText(this, (CharSequence) o_Details.get(1), Toast.LENGTH_SHORT).show();
 		orderName = (TextView) findViewById(R.id.orderName);
 		orderType = (TextView) findViewById(R.id.orderType);
 		orderQuantity = (TextView) findViewById(R.id.orderQuantity);
 		orderPrice = (TextView) findViewById(R.id.orderPrice);
 		orderDelivery = (TextView) findViewById(R.id.orderDelivery);
-		
+		availableQuantity = (TextView) findViewById(R.id.availableAmount);
 		btnAccept = (Button) findViewById(R.id.btnConfirm);
 		btnReject = (Button) findViewById(R.id.btnReject);
 		
@@ -61,6 +64,7 @@ public class NewOrderDetails extends Activity implements OnClickListener{
 		orderQuantity.setText((CharSequence) o_Details.get(3));
 		orderPrice.setText((CharSequence) o_Details.get(4));
 		orderDelivery.setText((CharSequence) o_Details.get(7));
+		availableQuantity.setText(total);
 		
 		prgDialog = new ProgressDialog(this);
  	    prgDialog.setMessage("Please wait...");
@@ -150,10 +154,28 @@ public class NewOrderDetails extends Activity implements OnClickListener{
 								//System.out.println("HI--"+obj.get("status"));
 								if(obj.get("current_status").equals("yes")){
 									//add status locally....
-									Toast.makeText(getApplicationContext(), "yes confirmed", Toast.LENGTH_LONG).show();
+									long rowId = db.updateOrderStatus("1",order_id);
+									if(rowId>0){
+										//upsync here....
+										Toast.makeText(getApplicationContext(), getString(R.string.order_confirmed), Toast.LENGTH_LONG).show();
+										//goto confirmed order details page
+										System.out.println("this is order id"+order_id);
+										Bundle b = new Bundle();
+							   	    	b.putString(applicationConstants.ORDER_ID,order_id);
+							   	    	Intent in = new Intent(getApplicationContext(), ConfirmedOrder.class);			     	   	    
+							   	    	in.putExtras(b);
+							   	    	startActivity(in);
+									}else{
+										Toast.makeText(getApplicationContext(), "Local update error", Toast.LENGTH_LONG).show();
+									}
 								}else if(obj.get("current_status").equals("no")){
 									//remove order from the table and go back to orders page.
-									Toast.makeText(getApplicationContext(), "No !! sorry you missed the order", Toast.LENGTH_LONG).show();
+									int row = db.deleteOrder(order_id);
+									Toast.makeText(getApplicationContext(), getString(R.string.order_already_taken), Toast.LENGTH_LONG).show();
+									
+						   	    	Intent in = new Intent(getApplicationContext(), DisplayOrders.class);	
+						   	    	startActivity(in);
+									
 								}else if(obj.get("current_status").equals("error")){
 									Toast.makeText(getApplicationContext(), "Unexpected System Error", Toast.LENGTH_LONG).show();
 								}

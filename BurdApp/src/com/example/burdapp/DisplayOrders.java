@@ -52,13 +52,15 @@ public class DisplayOrders extends Activity {
 	    final ListView listview = (ListView) findViewById(R.id.display_list);
 	   // final ListView listIds = (ListView) findViewById(R.id.display_list);
 	    final ArrayList<String> list_ids = new ArrayList<String>();
+	    final ArrayList<String> list_status = new ArrayList<String>();
 	    final ArrayList<String> list_names = new ArrayList<String>();
 	    
 	    //listA = new List<String>();
 	    for (int i = 0; i < array_list.size(); ++i) {
 	    	final ArrayList<Object> row = array_list.get(i);
-	    	list_ids.add((String) row.get(0));
-	    	list_names.add((String) row.get(1));
+	    	list_ids.add((String) row.get(0));//order id
+	    	list_status.add((String) row.get(9));//order status
+	    	list_names.add((String) row.get(1));//order names
 	    	
 	    	if(row.get(11).equals("1")){
 	    		
@@ -74,12 +76,19 @@ public class DisplayOrders extends Activity {
 		public void onItemClick(AdapterView<?> AdptView, final View view, int position,
 				long id) {
 			// TODO Auto-generated method stub
-			final String item = (String) AdptView.getItemAtPosition(position);
+			//final String item = (String) AdptView.getItemAtPosition(position);
 			final String id1 = list_ids.get(position);
+			final String status = list_status.get(position);
+			System.out.println("this is status "+status);
 			Toast.makeText(getApplicationContext(), id1, Toast.LENGTH_SHORT).show();
 			Bundle b = new Bundle();
    	    	b.putString(applicationConstants.ORDER_ID,list_ids.get(position));
-   	    	Intent in = new Intent(getApplicationContext(), NewOrderDetails.class);			     	   	    
+   	    	Intent in = null;
+   	    	if(status.equals("0")){
+   	    		in = new Intent(getApplicationContext(), NewOrderDetails.class);
+   	    	}else if(status.equals("1")){
+   	    		in = new Intent(getApplicationContext(), ConfirmedOrder.class);
+   	    	}
    	    	in.putExtras(b);
    	    	startActivity(in);			
 			

@@ -154,7 +154,10 @@ public class Database {
 			
 			cursor = db.query(
 					applicationConstants.FARMER_TABLE,
-					new String[]{applicationConstants.FARMER_NAME,applicationConstants.FARMER_SEED,applicationConstants.FARMER_KERNEL,applicationConstants.FARMER_FRUIT,applicationConstants.FARMER_CREATED_ON,applicationConstants.FARMER_ID,applicationConstants.FARMER_MOBILE,applicationConstants.FARMER_ADDRESS},
+					new String[]{applicationConstants.FARMER_NAME,applicationConstants.FARMER_SEED,
+							applicationConstants.FARMER_KERNEL,applicationConstants.FARMER_FRUIT,
+							applicationConstants.FARMER_CREATED_ON,applicationConstants.FARMER_ID,
+							applicationConstants.FARMER_MOBILE,applicationConstants.FARMER_ADDRESS},
 					null, null, null, null, applicationConstants.FARMER_NAME
 			);
  
@@ -395,6 +398,56 @@ public class Database {
 	
 	
 	///--------------------------functions for orders------------------------------
+	
+	public long updateOrderStatus(String status, String order_id)
+	{							
+		// this is a key value pair holder used by android's SQLite functions
+		ContentValues values = new ContentValues(1);	
+		values.put(applicationConstants.ORDER_STATUS,status);
+	
+		//values.put(applicationConstants.FARMER_STATUS,"no");
+		
+		long rowId=0;
+		String whereClause = applicationConstants.ORDER_ID+"="+order_id;
+		// ask the database object to insert the new data 
+		try{
+			rowId = db.update(applicationConstants.ORDER_TABLE,values,whereClause,null);
+			
+		}
+		catch(Exception e)
+		{
+			Log.e("DB ERROR", e.toString());
+			e.printStackTrace();
+		}
+		return rowId;
+	}
+	
+	public int deleteOrder(String order_id){
+		
+		String whereClause = applicationConstants.ORDER_ID +"="+order_id;
+		int rows = db.delete(applicationConstants.ORDER_TABLE, whereClause, null);
+		return rows;
+		
+	}
+	//get total available quantity as per the type
+	public String getTotalAvailableQuantity(String type){
+		Cursor cursor = null;
+		if(type.contentEquals("1"))
+			cursor=db.rawQuery("SELECT SUM("+ applicationConstants.FARMER_KERNEL+ ") FROM "+applicationConstants.FARMER_TABLE+"  ",null);		
+        else if(type.contentEquals("2"))
+        	cursor=db.rawQuery("SELECT SUM("+ applicationConstants.FARMER_SEED+ ") FROM "+applicationConstants.FARMER_TABLE+"  ",null);
+        else if(type.contentEquals("3"))
+        	cursor=db.rawQuery("SELECT SUM("+ applicationConstants.FARMER_FRUIT+ ") FROM "+applicationConstants.FARMER_TABLE+"  ",null);
+        else if(type.contentEquals("4"))
+        	cursor=db.rawQuery("SELECT SUM("+ applicationConstants.FARMER_PULP+ ") FROM "+applicationConstants.FARMER_TABLE+"  ",null);
+		
+		
+		cursor.moveToFirst();
+		
+		
+		return cursor.getString(0);
+		
+	}
 	
 	public void addAndUpdateOrders(JSONObject obj)
 	{

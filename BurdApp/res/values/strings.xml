@@ -72,6 +72,10 @@
 	<string name="available_quantity">Uplabdh Matra</string>
 	<string name="accept_confirmation_for_order_msg">Kya aap is order ko swiikar karna chahte hain?</string>
 	<string name="reject_confirmation_for_order_msg">Kya aap is order ko radh karna chahte hain?</string>
+	<string name="order_confirmed">Aapka order confirm ho chuka hai</string>
+	<string name="order_already_taken">Maaf kigiyega!! Order kisi aur ko mil gayi hai!!</string>
+	<string name="order_rejected">Aapka order radh ho chuka hai</string>
+	<string name="select_farmer">kisan chunein</string>
 	
 	
 	<!-- edit_menu_action.xml -->
