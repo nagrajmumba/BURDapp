@@ -120,13 +120,16 @@ public class FarmerDetailsPage extends Activity implements OnClickListener{
     	textFruit.setText(row.get(6).toString());
     	textFruit.setGravity(Gravity.CENTER_VERTICAL);
     	
+    	TextView textPulp =(TextView)findViewById(R.id.pulp);
+    	textPulp.setText(row.get(13).toString());
+    	textPulp.setGravity(Gravity.CENTER_VERTICAL);
     	
-    	
+    	   	
     	call.setOnClickListener(new OnClickListener() {
 	       	 
 	   	     @Override
 	   	     public void onClick(View v) {
-	   	    	//Log.v(fname,row.get(7).toString() );
+	   	    	
 	   	    	call("tel:+91"+row.get(7).toString());
 	   	 }
    	   });

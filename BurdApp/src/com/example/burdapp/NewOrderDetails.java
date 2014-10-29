@@ -34,6 +34,7 @@ public class NewOrderDetails extends Activity implements OnClickListener{
 	ProgressDialog prgDialog;
 	TextView orderName, orderType, orderQuantity, orderPrice, orderDelivery, availableQuantity;
 	Button btnAccept, btnReject;
+	String m_id;
 	@Override
 	  protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -45,7 +46,7 @@ public class NewOrderDetails extends Activity implements OnClickListener{
 		ArrayList<Object> o_Details = db.getOrderById(order_id);
 		
 		String total = db.getTotalAvailableQuantity(o_Details.get(6).toString());
-		
+		System.out.println(total+"this is total");
 		//Toast.makeText(this, (CharSequence) o_Details.get(1), Toast.LENGTH_SHORT).show();
 		orderName = (TextView) findViewById(R.id.orderName);
 		orderType = (TextView) findViewById(R.id.orderType);
@@ -70,6 +71,8 @@ public class NewOrderDetails extends Activity implements OnClickListener{
  	    prgDialog.setMessage("Please wait...");
 		prgDialog.setCancelable(false);
 		
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+		m_id = prefs.getString(applicationConstants.MEDIATOR_ID, null);
 	}
 	
 	@Override
@@ -157,6 +160,7 @@ public class NewOrderDetails extends Activity implements OnClickListener{
 									long rowId = db.updateOrderStatus("1",order_id);
 									if(rowId>0){
 										//upsync here....
+										db.updateOrderAccepted(order_id, m_id);
 										Toast.makeText(getApplicationContext(), getString(R.string.order_confirmed), Toast.LENGTH_LONG).show();
 										//goto confirmed order details page
 										System.out.println("this is order id"+order_id);
@@ -218,14 +222,13 @@ public class NewOrderDetails extends Activity implements OnClickListener{
 		wordList = new ArrayList<HashMap<String, String>>();
 		//ArrayList<HashMap<String, String>> mList = db.getMediator();
 		//String mediatorId = mList.get(0).get(applicationConstants.MEDIATOR_ID);
-		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-		String m_id = prefs.getString(applicationConstants.MEDIATOR_ID, null);
+		
 		
 	        	HashMap<String, String> map = new HashMap<String, String>();
 	        	
 	    		map.put(applicationConstants.ORDER_ID, order_id);
-	    		if(!m_id.equals(null)){
-	    			map.put(applicationConstants.MEDIATOR_ID, order_id);
+	    		if(m_id!=null){
+	    			map.put(applicationConstants.MEDIATOR_ID, m_id);
 	    		}else{
 	    			map.put(applicationConstants.MEDIATOR_ID, "0");
 	    		}

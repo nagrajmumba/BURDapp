@@ -1,7 +1,9 @@
 package com.example.burdapp;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.EmptyStackException;
 import java.util.HashMap;
 
@@ -157,7 +159,10 @@ public class Database {
 					new String[]{applicationConstants.FARMER_NAME,applicationConstants.FARMER_SEED,
 							applicationConstants.FARMER_KERNEL,applicationConstants.FARMER_FRUIT,
 							applicationConstants.FARMER_CREATED_ON,applicationConstants.FARMER_ID,
-							applicationConstants.FARMER_MOBILE,applicationConstants.FARMER_ADDRESS},
+							applicationConstants.FARMER_MOBILE,applicationConstants.FARMER_ADDRESS,
+							applicationConstants.FARMER_PULP,applicationConstants.FARMER_OCCUPIED_KERNEL,
+							applicationConstants.FARMER_OCCUPIED_SEED,applicationConstants.FARMER_OCCUPIED_FRUIT,
+							applicationConstants.FARMER_OCCUPIED_PULP},
 					null, null, null, null, applicationConstants.FARMER_NAME
 			);
  
@@ -183,7 +188,19 @@ public class Database {
 					dataList.add(cursor.getString(5));
 					//Log.v("mobile", cursor.getString(5));
 					dataList.add(cursor.getString(6));
-					//Log.v("address", cursor.getString(6));		
+					//Log.v("address", cursor.getString(6));	
+					dataList.add(cursor.getString(7));
+					//Log.v("address", cursor.getString(6));
+					dataList.add(cursor.getString(8));
+					//Log.v("address", cursor.getString(6));
+					dataList.add(cursor.getString(9));
+					//Log.v("address", cursor.getString(6));
+					dataList.add(cursor.getString(10));
+					//Log.v("address", cursor.getString(6));
+					dataList.add(cursor.getString(11));
+					//Log.v("address", cursor.getString(6));
+					dataList.add(cursor.getString(12));
+					//Log.v("address", cursor.getString(6));
 					
 					
 					
@@ -280,7 +297,9 @@ public class Database {
 							applicationConstants.FARMER_FRUIT,applicationConstants.FARMER_MOBILE,
 							applicationConstants.FARMER_ADDRESS,applicationConstants.FARMER_STREET,
 							applicationConstants.FARMER_LANDMARK,applicationConstants.FARMER_CITY,
-							applicationConstants.FARMER_STATE},
+							applicationConstants.FARMER_STATE,applicationConstants.FARMER_PULP,
+							applicationConstants.FARMER_OCCUPIED_KERNEL,applicationConstants.FARMER_OCCUPIED_SEED,
+							applicationConstants.FARMER_OCCUPIED_FRUIT,applicationConstants.FARMER_OCCUPIED_PULP},
 					applicationConstants.FARMER_ID + "= '" + f_id+"'",
 					null, null, null, null, null
 			);
@@ -307,6 +326,12 @@ public class Database {
 					rowArray.add(cursor.getString(10));
 					rowArray.add(cursor.getString(11));
 					rowArray.add(cursor.getString(12));
+					rowArray.add(cursor.getString(13));
+					rowArray.add(cursor.getString(12));
+					rowArray.add(cursor.getString(14));
+					rowArray.add(cursor.getString(15));
+					rowArray.add(cursor.getString(16));
+					
 				}
 				while (cursor.moveToNext());
 			}
@@ -326,7 +351,7 @@ public class Database {
 	}
 	
 	
-	public long insertFarmer(String name,String mobile, String seed,String fruit,String kernel,String street, String landmark, String city, String state,String pincode,String address)
+	public long insertFarmer(String name,String mobile, String seed,String fruit,String kernel,String pulp,String street, String landmark, String city, String state,String pincode,String address)
 	{							
 		// this is a key value pair holder used by android's SQLite functions
 		ContentValues values = new ContentValues(12);
@@ -337,6 +362,7 @@ public class Database {
 		values.put(applicationConstants.FARMER_SEED,seed);
 		values.put(applicationConstants.FARMER_FRUIT,fruit);
 		values.put(applicationConstants.FARMER_KERNEL,kernel);
+		values.put(applicationConstants.FARMER_PULP,pulp);
 		
 		values.put(applicationConstants.FARMER_STREET,street);
 		values.put(applicationConstants.FARMER_LANDMARK,landmark);
@@ -361,7 +387,7 @@ public class Database {
 		return rowId;
 	}
 	
-	public long updateFarmer(String name,String mobile, String seed,String fruit,String kernel,String street, String landmark, String city, String state,String pincode,String address,String f_id)
+	public long updateFarmer(String name,String mobile, String seed,String fruit,String kernel,String pulp,String street, String landmark, String city, String state,String pincode,String address,String f_id)
 	{							
 		// this is a key value pair holder used by android's SQLite functions
 		ContentValues values = new ContentValues(12);
@@ -372,6 +398,7 @@ public class Database {
 		values.put(applicationConstants.FARMER_SEED,seed);
 		values.put(applicationConstants.FARMER_FRUIT,fruit);
 		values.put(applicationConstants.FARMER_KERNEL,kernel);
+		values.put(applicationConstants.FARMER_PULP,pulp);
 		
 		values.put(applicationConstants.FARMER_STREET,street);
 		values.put(applicationConstants.FARMER_LANDMARK,landmark);
@@ -395,7 +422,97 @@ public class Database {
 		}
 		return rowId;
 	}
-	
+	///-----------------------Functions for order_farmers ------------------------------
+		/* get all the farmers*/
+		public ArrayList<ArrayList<Object>> getFarmersOfOrder(String order_id)
+		{
+			
+			ArrayList<ArrayList<Object>> dataArrays = new ArrayList<ArrayList<Object>>();
+	 
+			Cursor cursor=null;
+			String  sqlQuery= "Select ";
+			sqlQuery += applicationConstants.FARMER_ID+", "+applicationConstants.FARMER_NAME+","+
+					applicationConstants.FARMER_KERNEL+","+applicationConstants.FARMER_SEED+","+
+					applicationConstants.FARMER_FRUIT+","+applicationConstants.FORDER_DELIVERY_DATE+","+
+					applicationConstants.FORDER_QUANTITY+","+applicationConstants.FORDER_PRICE+","+
+					applicationConstants.FORDER_TRAVEL_COST+","+applicationConstants.FORDER_ID+","+
+					applicationConstants.FORDER_STATUS+","+applicationConstants.FORDER_RECEIVED+","+
+					applicationConstants.FARMER_PULP+","+applicationConstants.FARMER_OCCUPIED_KERNEL+","+
+					applicationConstants.FARMER_OCCUPIED_SEED+","+applicationConstants.FARMER_OCCUPIED_FRUIT+","+
+					applicationConstants.FARMER_OCCUPIED_PULP;
+			
+			sqlQuery += " from "+ applicationConstants.FARMER_TABLE +","+ applicationConstants.FARMER_ORDER_TABLE;
+			sqlQuery += " where "+ applicationConstants.FORDER_ORDER_ID+"="+order_id+
+					" and "+applicationConstants.FORDER_FARMER_ID+"="+applicationConstants.FARMER_ID;
+			try
+			{
+				
+				cursor = db.rawQuery(sqlQuery, null);
+	 
+				System.out.println(cursor.getColumnNames());
+				
+	 
+				if (cursor != null && cursor.moveToFirst())
+				{
+					do
+					{
+						ArrayList<Object> dataList = new ArrayList<Object>();
+	 
+						dataList.add(cursor.getString(0));
+						//Log.v("name", cursor.getString(0));
+						dataList.add(cursor.getString(1));
+						//Log.v("seed", cursor.getString(1));
+						dataList.add(cursor.getString(2));
+						//Log.v("kernel", cursor.getString(2));
+						dataList.add(cursor.getString(3));
+						//Log.v("fruit", cursor.getString(3));
+						dataList.add(cursor.getString(4));
+						//Log.v("created on", cursor.getString(4));
+						dataList.add(cursor.getString(5));
+						//Log.v("mobile", cursor.getString(5));
+						dataList.add(cursor.getString(6));
+						//Log.v("address", cursor.getString(6));
+						dataList.add(cursor.getString(7));
+						//Log.v("address", cursor.getString(6));
+						dataList.add(cursor.getString(8));
+						//Log.v("address", cursor.getString(6));
+						dataList.add(cursor.getString(9));
+						//Log.v("address", cursor.getString(6));
+						dataList.add(cursor.getString(10));
+						//Log.v("address", cursor.getString(6));
+						dataList.add(cursor.getString(11));
+						//Log.v("address", cursor.getString(6));
+						dataList.add(cursor.getString(12));
+						//Log.v("address", cursor.getString(6));
+						dataList.add(cursor.getString(13));
+						//Log.v("address", cursor.getString(6));
+						dataList.add(cursor.getString(14));
+						//Log.v("address", cursor.getString(6));
+						dataList.add(cursor.getString(15));
+						//Log.v("address", cursor.getString(6));
+						dataList.add(cursor.getString(16));
+						//Log.v("address", cursor.getString(6));
+												
+						dataArrays.add(dataList);
+					}
+					// move the cursor's pointer up one position.
+					while (cursor.moveToNext());
+				}else{
+					return null;
+				}
+				
+			}
+			catch (SQLException e)
+			{
+				Log.e("DB Error", e.toString());
+				e.printStackTrace();
+			}
+	 
+			// return the ArrayList that holds the data collected from
+			// the database.
+			return dataArrays;
+		}
+		
 	
 	///--------------------------functions for orders------------------------------
 	
@@ -421,7 +538,115 @@ public class Database {
 		}
 		return rowId;
 	}
+	public long updateOrderAccepted(String order_id, String mediator_id)
+	{							
+		// this is a key value pair holder used by android's SQLite functions
+		ContentValues values = new ContentValues(1);	
+		values.put(applicationConstants.ORDER_ACCEPTED_BY,mediator_id);
+		values.put(applicationConstants.ORDER_NEW,"0");
+		values.put(applicationConstants.ORDER_VIEW,"1");
 	
+		//values.put(applicationConstants.FARMER_STATUS,"no");
+		
+		long rowId=0;
+		String whereClause = applicationConstants.ORDER_ID+"="+order_id;
+		// ask the database object to insert the new data 
+		try{
+			rowId = db.update(applicationConstants.ORDER_TABLE,values,whereClause,null);
+			
+		}
+		catch(Exception e)
+		{
+			Log.e("DB ERROR", e.toString());
+			e.printStackTrace();
+		}
+		return rowId;
+	}
+	public void updateOccupiedQuantity(String f_id, String type, String qty, String add_or_sub_flag){
+		Cursor cursor = null, fcursor =null;
+		ArrayList<ArrayList<Object>> dataArrays = new ArrayList<ArrayList<Object>>();
+		cursor = db.rawQuery("SELECT "+applicationConstants.FORDER_ID+","+applicationConstants.FORDER_ORDER_ID+","+
+								applicationConstants.FORDER_FARMER_ID+","+applicationConstants.FORDER_QUANTITY+","+
+								applicationConstants.ORDER_TYPE+ " from " +applicationConstants.ORDER_TABLE+ " and " +applicationConstants.FARMER_ORDER_TABLE+ " where "+
+								applicationConstants.ORDER_ID +" = "+applicationConstants.FORDER_ORDER_ID
+								,null);		
+		cursor.moveToFirst();
+		if(cursor.getCount()>0){
+			do{
+				ArrayList<Object> dataList = new ArrayList<Object>();
+				dataList.add(cursor.getString(0));
+				dataList.add(cursor.getString(1));
+				dataList.add(cursor.getString(2));
+				dataList.add(cursor.getString(3));
+				dataList.add(cursor.getString(3));
+				dataArrays.add(dataList);
+			}
+			while(cursor.moveToNext());
+		}
+		
+		for(int i=0; i<dataArrays.size();i++){
+			
+			ArrayList<Object> row = dataArrays.get(i);
+			String far_ord_id = row.get(0).toString();
+			String ord_id = row.get(1).toString();
+			String farmer_id = row.get(2).toString();
+			String ford_qty = row.get(3).toString();
+			String raw_type = row.get(4).toString();
+			String farmer_raw_type = null;
+			if(raw_type.equals("1")){
+				farmer_raw_type= applicationConstants.FARMER_OCCUPIED_KERNEL;
+			}else if(raw_type.equals("2")){
+				farmer_raw_type= applicationConstants.FARMER_OCCUPIED_SEED;
+			}else if(raw_type.equals("3")){
+				farmer_raw_type= applicationConstants.FARMER_OCCUPIED_FRUIT;
+			}else if(raw_type.equals("4")){
+				farmer_raw_type= applicationConstants.FARMER_OCCUPIED_PULP;
+			}
+			
+			fcursor = db.rawQuery("SELECT "+farmer_raw_type+" from "+ applicationConstants.FARMER_TABLE+" where "+
+						applicationConstants.FARMER_ID+" = '"+farmer_id+"'"
+					,null);	
+			fcursor.moveToFirst();
+			int fqty = Integer.valueOf(fcursor.getString(0));
+			
+			
+			
+		}
+		int farmerqty = Integer.valueOf(fcursor.getString(0));
+		int finalQty = 0;
+		if(add_or_sub_flag.equals("add")){
+			finalQty = farmerqty + Integer.valueOf(qty);
+		}else if(add_or_sub_flag.equals("subtract")){
+			if(farmerqty!=0 && farmerqty > Integer.valueOf(qty))
+				finalQty = farmerqty - Integer.valueOf(qty);				
+		}
+		
+		ContentValues value = new ContentValues();		
+		
+		value.put(applicationConstants.FARMER_SYNCHED, "0");
+		
+		if(type.contentEquals("1"))
+			value.put(applicationConstants.FARMER_OCCUPIED_KERNEL, finalQty);		
+        else if(type.contentEquals("2"))
+        	value.put(applicationConstants.FARMER_OCCUPIED_SEED, finalQty);
+        else if(type.contentEquals("3"))
+        	value.put(applicationConstants.FARMER_OCCUPIED_FRUIT, finalQty);
+        else if(type.contentEquals("4"))
+        	value.put(applicationConstants.FARMER_OCCUPIED_PULP, finalQty);
+		
+				//Cursor Fcursor = null;		
+		try {
+	       		String whereClause=applicationConstants.FARMER_ID+"='"+f_id+"'";
+				int rows = db.update(applicationConstants.FARMER_TABLE, value, whereClause, null);
+				System.out.print(rows+" this no.of rows updated on qty update");
+			
+			}catch (Exception e)
+			{
+				Log.e("DB ERROR", e.toString());
+				e.printStackTrace();
+			}
+		
+	}
 	public int deleteOrder(String order_id){
 		
 		String whereClause = applicationConstants.ORDER_ID +"="+order_id;
@@ -433,22 +658,37 @@ public class Database {
 	public String getTotalAvailableQuantity(String type){
 		Cursor cursor = null;
 		if(type.contentEquals("1"))
-			cursor=db.rawQuery("SELECT SUM("+ applicationConstants.FARMER_KERNEL+ ") FROM "+applicationConstants.FARMER_TABLE+"  ",null);		
+			cursor=db.rawQuery("SELECT SUM(CAST("+ applicationConstants.FARMER_KERNEL+ " AS UNSIGNED))- SUM(CAST("+applicationConstants.FARMER_OCCUPIED_KERNEL+" AS UNSIGNED))  FROM "+applicationConstants.FARMER_TABLE+"  ",null);		
         else if(type.contentEquals("2"))
-        	cursor=db.rawQuery("SELECT SUM("+ applicationConstants.FARMER_SEED+ ") FROM "+applicationConstants.FARMER_TABLE+"  ",null);
+        	cursor=db.rawQuery("SELECT SUM(CAST("+ applicationConstants.FARMER_SEED+ " AS UNSIGNED))- SUM(CAST("+applicationConstants.FARMER_OCCUPIED_SEED+" AS UNSIGNED)) FROM "+applicationConstants.FARMER_TABLE+"  ",null);
         else if(type.contentEquals("3"))
-        	cursor=db.rawQuery("SELECT SUM("+ applicationConstants.FARMER_FRUIT+ ") FROM "+applicationConstants.FARMER_TABLE+"  ",null);
+        	cursor=db.rawQuery("SELECT SUM(CAST("+ applicationConstants.FARMER_FRUIT+ " AS UNSIGNED))- SUM(CAST("+applicationConstants.FARMER_OCCUPIED_FRUIT+" AS UNSIGNED)) FROM "+applicationConstants.FARMER_TABLE+"  ",null);
         else if(type.contentEquals("4"))
-        	cursor=db.rawQuery("SELECT SUM("+ applicationConstants.FARMER_PULP+ ") FROM "+applicationConstants.FARMER_TABLE+"  ",null);
+        	cursor=db.rawQuery("SELECT SUM(CAST("+ applicationConstants.FARMER_PULP+ " AS UNSIGNED))- SUM(CAST("+applicationConstants.FARMER_OCCUPIED_PULP+" AS UNSIGNED)) FROM "+applicationConstants.FARMER_TABLE+"  ",null);
 		
 		
 		cursor.moveToFirst();
-		
+		//System.out.println(cursor.getColumnName(0)+": this is sum of avail qty"+cursor.getCount()+ cursor.getDouble(0));
 		
 		return cursor.getString(0);
 		
 	}
-	
+	public void removeUnwantedOrders(ArrayList<String> id_list){
+		Cursor cursor = null;
+		cursor=db.rawQuery("SELECT "+applicationConstants.ORDER_ID+" FROM "+applicationConstants.ORDER_TABLE+" where "+applicationConstants.ORDER_NEW+"='1'",null);
+		//ArrayList<String> del_list = new ArrayList<String>();
+		if(cursor!=null && cursor.getCount()>0){
+			if(cursor.moveToFirst()){
+				do{
+					if(id_list.contains(cursor.getString(0))){
+						
+					}else{
+						deleteOrder(cursor.getString(0));
+					}
+				}while(cursor.moveToNext());
+			}
+		}
+	}
 	public void addAndUpdateOrders(JSONObject obj)
 	{
 		try {
@@ -693,8 +933,170 @@ public class Database {
 		return dataArrays;
 	}
 	
+	///--------------------------functions for farmer_orders------------------------------
 	
+	public void assignFarmersToOrder(String order_id, String f_id,String qty, String price, String delDate)
+	{
+		//ContentValues values = new ContentValues();
+		
+		/*Cursor cursor = null, Fcursor=null;
+		try {
+			cursor = db.rawQuery("SELECT "+ DATE+ " FROM "+TABLE_NAME+" WHERE "+ORDER_ID+" LIKE ? ",new String[]{ order_id});
+         	cursor.moveToFirst();
+			Log.v("DATE", cursor.getString(0));
+            
+		}
+		catch (Exception e)
+		{
+			Log.e("DB ERROR", e.toString());
+			e.printStackTrace();
+		}*/
+		Calendar c = Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("dd:MM:yyyy HH:mm:ss a");
+		String strDate = sdf.format(c.getTime());
+		
+		ContentValues value = new ContentValues();
+		value.put(applicationConstants.FORDER_ORDER_ID, order_id);
+		value.put(applicationConstants.FORDER_FARMER_ID, f_id);
+		value.put(applicationConstants.FORDER_QUANTITY, qty);
+		value.put(applicationConstants.FORDER_PRICE, price);
+		value.put(applicationConstants.FORDER_DELIVERY_DATE, delDate);
+		value.put(applicationConstants.FORDER_SYNCHED, "0");
+		value.put(applicationConstants.FORDER_ASSIGNED,strDate);
+		/*value.put(F_DELIVERY_DATE, cursor.getString(0));
+		value.put(F_QUANTITY,"100");
+		value.put(F_RATE, "10");
+		value.put(F_TOTAL,"");
+		value.put(F_TRAVEL,"20");
+		value.put(F_ASSIGNED,"0");
+		value.put(F_PAYED,"--");
+		value.put(F_RECEIVED,"0");*/
+		Cursor Fcursor = null;		
+		try {
+		Fcursor = db.rawQuery("SELECT "+applicationConstants.FORDER_ID+" FROM "+applicationConstants.FARMER_ORDER_TABLE+" WHERE "+applicationConstants.FORDER_FARMER_ID+" = ? and "+applicationConstants.FORDER_ORDER_ID+" = ? ",new String[]{ f_id,order_id});
+       	       
+	       	if(Fcursor != null && Fcursor.moveToFirst()){
+	       		String whereClause=applicationConstants.FORDER_ID+"='"+Fcursor.getString(0)+"'";
+				int rows = db.update(applicationConstants.FARMER_ORDER_TABLE, value, whereClause, null);
+				System.out.print(rows+" this no.of row updated");
+				
+			}else{
+				
+				long rowid = db.insert(applicationConstants.FARMER_ORDER_TABLE, null, value);
+				System.out.print(rowid+" this is insert id");
+				
+			}
+		}
+		
+		catch (Exception e)
+		{
+			Log.e("DB ERROR", e.toString());
+			e.printStackTrace();
+		}
+	}
 	
+	public void updateFarmerOrderQty(String forder_id, String qty)
+	{
+		ContentValues value = new ContentValues();		
+		value.put(applicationConstants.FORDER_QUANTITY, qty);
+		value.put(applicationConstants.FORDER_SYNCHED, "0");
+		
+		
+		//Cursor Fcursor = null;		
+		try {
+	       		String whereClause=applicationConstants.FORDER_ID+"='"+forder_id+"'";
+				int rows = db.update(applicationConstants.FARMER_ORDER_TABLE, value, whereClause, null);
+				System.out.print(rows+" this no.of rows updated on qty update");
+			
+			}catch (Exception e)
+			{
+				Log.e("DB ERROR", e.toString());
+				e.printStackTrace();
+			}
+	}
+	
+	public void updateFarmerOrderPrice(String forder_id, String price)
+	{
+		ContentValues value = new ContentValues();		
+		value.put(applicationConstants.FORDER_PRICE, price);
+		value.put(applicationConstants.FORDER_SYNCHED, "0");
+		
+		
+	//	Cursor Fcursor = null;		
+		try {
+			String whereClause=applicationConstants.FORDER_ID+"='"+forder_id+"'";
+				int rows = db.update(applicationConstants.FARMER_ORDER_TABLE, value, whereClause, null);
+				System.out.print(rows+" this no.of rows updated on price update");
+			
+			}catch (Exception e)
+			{
+				Log.e("DB ERROR", e.toString());
+				e.printStackTrace();
+			}
+	}
+	public void updateFarmerOrderTravelCost(String forder_id, String travel_cost)
+	{
+		ContentValues value = new ContentValues();		
+		value.put(applicationConstants.FORDER_TRAVEL_COST, travel_cost);
+		value.put(applicationConstants.FORDER_SYNCHED, "0");
+		
+		
+		//Cursor Fcursor = null;		
+		try {
+			String whereClause=applicationConstants.FORDER_ID+"='"+forder_id+"'";
+				int rows = db.update(applicationConstants.FARMER_ORDER_TABLE, value, whereClause, null);
+				System.out.print(rows+" this no.of rows updated on travel update");
+			
+			}catch (Exception e)
+			{
+				Log.e("DB ERROR", e.toString());
+				e.printStackTrace();
+			}
+	}
+	
+	public void updateFarmerOrderDeliveryDate(String forder_id, String subOrd_del_date)
+	{
+		ContentValues value = new ContentValues();		
+		value.put(applicationConstants.FORDER_DELIVERY_DATE, subOrd_del_date);
+		value.put(applicationConstants.FORDER_SYNCHED, "0");
+		
+		
+		//Cursor Fcursor = null;		
+		try {
+			String whereClause=applicationConstants.FORDER_ID+"='"+forder_id+"'";
+				int rows = db.update(applicationConstants.FARMER_ORDER_TABLE, value, whereClause, null);
+				System.out.print(rows+" this no.of rows updated on suborder_deldate update");
+			
+			}catch (Exception e)
+			{
+				Log.e("DB ERROR", e.toString());
+				e.printStackTrace();
+			}
+	}
+	
+	public void updateFarmerOrderReceived(String forder_id, String received_date)
+	{
+		ContentValues value = new ContentValues();	
+		//if(!received_date.equals(""))
+			value.put(applicationConstants.FORDER_RECEIVED, received_date);
+		//else
+			//value.put(applicationConstants.FORDER_RECEIVED, "");
+		
+		value.put(applicationConstants.FORDER_SYNCHED, "0");
+		
+		
+		//Cursor Fcursor = null;		
+		try {
+			String whereClause=applicationConstants.FORDER_ID+"='"+forder_id+"'";
+				int rows = db.update(applicationConstants.FARMER_ORDER_TABLE, value, whereClause, null);
+				System.out.print(rows+" this no.of rows updated on "+ received_date +" received_date update");
+			
+			}catch (Exception e)
+			{
+				Log.e("DB ERROR", e.toString());
+				e.printStackTrace();
+			}
+	}
 	///--------------------------General functions---------------------------------
 	
 	public int getRowsCountOfTable(String tableName){
@@ -745,16 +1147,21 @@ public class Database {
 			applicationConstants.FARMER_ID + "  integer primary key autoincrement not null," +
 			applicationConstants.FARMER_NAME + " string," +
 			applicationConstants.FARMER_MOBILE + " string," +
-			applicationConstants.FARMER_SEED + " string," +
-			applicationConstants.FARMER_KERNEL + " string," +
-			applicationConstants.FARMER_FRUIT + " string," +
+			applicationConstants.FARMER_SEED + " string DEFAULT '0'," +
+			applicationConstants.FARMER_KERNEL + " string DEFAULT '0'," +
+			applicationConstants.FARMER_FRUIT + " string DEFAULT '0'," +
+			applicationConstants.FARMER_PULP + " string DEFAULT '0'," +
 			applicationConstants.FARMER_STREET + " string," +
 			applicationConstants.FARMER_LANDMARK + " string," +
 			applicationConstants.FARMER_CITY + " string," +
 			applicationConstants.FARMER_STATE + " string," +
 			applicationConstants.FARMER_PINCODE + " string," +
 			applicationConstants.FARMER_ADDRESS + " string," +				
-			applicationConstants.FARMER_CREATED_ON + " string," +	
+			applicationConstants.FARMER_CREATED_ON + " string," +
+			applicationConstants.FARMER_OCCUPIED_KERNEL + " string DEFAULT '0'," +
+			applicationConstants.FARMER_OCCUPIED_SEED + " string DEFAULT '0'," +
+			applicationConstants.FARMER_OCCUPIED_FRUIT + " string DEFAULT '0'," +
+			applicationConstants.FARMER_OCCUPIED_PULP + " string DEFAULT '0'," +			
 			applicationConstants.FARMER_SYNCHED + " INTEGER DEFAULT 0" +
 			");";
 			
@@ -766,7 +1173,7 @@ public class Database {
 			String OrderFarmerQueryString = "create table " +
 			applicationConstants.FARMER_ORDER_TABLE +
 			" (" +
-			applicationConstants.FORDER_ID + " string," +
+			applicationConstants.FORDER_ID + " integer primary key autoincrement not null," +
 			applicationConstants.FORDER_ORDER_ID + " string," +
 			applicationConstants.FORDER_FARMER_ID + " string," +
 			applicationConstants.FORDER_DELIVERY_DATE + " string," +
@@ -777,7 +1184,7 @@ public class Database {
 			applicationConstants.FORDER_RECEIVED + " string," +
 			applicationConstants.FORDER_PAYMENT + " string," +
 			applicationConstants.FORDER_STATUS + " string," +	
-			applicationConstants.FARMER_SYNCHED + " INTEGER DEFAULT 0" +
+			applicationConstants.FORDER_SYNCHED + " INTEGER DEFAULT 0" +
 			");";
 
 			

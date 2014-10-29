@@ -66,7 +66,7 @@ public class DisplayOrders extends Activity {
 	    		
 	    	}
 	    }
-	    
+	   
 	    
 	    final StableArrayAdapter lAdapter = new StableArrayAdapter(this,android.R.layout.simple_spinner_dropdown_item,list_names);
 	    listview.setAdapter((ListAdapter) lAdapter);
@@ -88,6 +88,10 @@ public class DisplayOrders extends Activity {
    	    		in = new Intent(getApplicationContext(), NewOrderDetails.class);
    	    	}else if(status.equals("1")){
    	    		in = new Intent(getApplicationContext(), ConfirmedOrder.class);
+   	    	}else if(status.equals("2")){
+   	    		in = new Intent(getApplicationContext(), AssignFarmers.class);
+   	    	}else if(status.equals("3")){
+   	    		in = new Intent(getApplicationContext(), SubOrderAssign.class);
    	    	}
    	    	in.putExtras(b);
    	    	startActivity(in);			

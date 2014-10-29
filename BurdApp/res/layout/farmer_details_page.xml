@@ -210,10 +210,7 @@
             android:layout_gravity="center_vertical" 
             android:maxLength="4"
             android:textSize="18sp"
-             android:layout_marginRight="12dip"
-            
-             android:inputType="number"
-            
+             android:layout_marginRight="12dip"   
             android:maxLines="1"
             
             />
@@ -270,9 +267,6 @@
             android:maxLength="4"
             android:textSize="18sp"
             android:layout_marginRight="12dip"
-            
-             android:inputType="number"
-            
             android:maxLines="1"
             
             />
@@ -329,7 +323,7 @@
             android:textSize="18sp"
             
             android:layout_marginRight="12dip"
-             android:inputType="number"
+             
             
             android:maxLines="1"
             
@@ -348,7 +342,63 @@
            />
         </LinearLayout>
         
+       <TextView 
+   	        android:layout_marginLeft="5dip"
+            android:layout_marginRight="5dip"
+   	        android:layout_width="match_parent"
+   	        android:layout_height="1dip"
+   	        android:layout_weight="1"
+   	        android:background="@drawable/grey_line"
+   	        
+   	        />
        
+       
+       <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="48dp" 
+        android:layout_marginLeft="5dip"
+     android:layout_marginRight="5dip"
+      android:layout_gravity="center_vertical" >
+
+         <TextView
+            android:layout_width="match_parent"
+            
+            android:textColor="#000000"
+            android:layout_height="wrap_content"
+            android:text="@string/fpulp"
+            android:textSize="18sp"
+            android:layout_weight="0.6"
+            android:layout_gravity="center_vertical" 
+           />
+        
+        <TextView
+            android:id="@+id/pulp"
+            android:layout_width="wrap_content"
+            android:textColor="#000000"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical" 
+            android:maxLength="4"
+            android:textSize="18sp"
+            
+            android:layout_marginRight="12dip"
+             
+            
+            android:maxLines="1"
+            
+            />
+        
+         <TextView
+            android:layout_width="wrap_content"
+            android:layout_gravity="center_vertical" 
+            android:textColor="#000000"
+            android:layout_height="wrap_content"
+            android:text="@string/kilo"
+            android:textSize="21sp"
+             android:maxLines="1"
+             
+            
+           />
+        </LinearLayout>
        <TextView 
    	        android:layout_marginLeft="5dip"
             android:layout_marginRight="5dip"

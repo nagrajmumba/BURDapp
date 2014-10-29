@@ -144,7 +144,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:text="Large Text"
+            android:text="@string/available_quantities"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TextView

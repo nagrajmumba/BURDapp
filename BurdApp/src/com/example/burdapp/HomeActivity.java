@@ -63,8 +63,7 @@ public class HomeActivity extends Activity implements OnClickListener{
 	         
 	         db = new Database(this);
 	 	    prgDialog = new ProgressDialog(this);
-	 	    prgDialog.setMessage("Synching SQLite Data with Remote MySQL DB. Please wait...");
-			prgDialog.setCancelable(false);
+	 	   
 			
 	 	    flag=0;
 	    }
@@ -73,17 +72,19 @@ public class HomeActivity extends Activity implements OnClickListener{
 						
 			AsyncHttpClient client = new AsyncHttpClient();
 			RequestParams params = new RequestParams();
-							
+			 	prgDialog.setMessage("Synching SQLite Data with Remote MySQL DB. Please wait...");
+				prgDialog.setCancelable(false);		
 					prgDialog.show();
 					params.put("mediatorJSON", composeJSONforMediator("getOrders"));
 					client.get(applicationConstants.SERVER_URL+"orders.php",params ,new AsyncHttpResponseHandler() {
 						@Override
 						public void onSuccess(String response) {
 							System.out.println(response);
-							//prgDialog.hide();
+							prgDialog.hide();
 							if(response!=null){
 								try {
 									JSONArray arr = new JSONArray(response);
+									ArrayList<String> id_list = new ArrayList<String>();
 									//System.out.println(arr.length());
 									for(int i=0; i<arr.length()-1;i++){
 										JSONObject obj = (JSONObject)arr.get(i);
@@ -91,12 +92,15 @@ public class HomeActivity extends Activity implements OnClickListener{
 										
 										if(!obj.get("id").equals(null)){
 											db.addAndUpdateOrders(obj);
+											id_list.add((String) obj.get("id"));
 										}
 									}
+									db.removeUnwantedOrders(id_list);
 									Toast.makeText(getApplicationContext(), "All the orders have been downloaded", Toast.LENGTH_LONG).show();
 									//startActivity(new Intent(getApplicationContext(),DisplayOrders.class));
-									removeAcceptedOrders();
-									flag=1;						
+									//removeAcceptedOrders();
+									flag=1;			
+									startActivity(new Intent(getApplicationContext(),DisplayOrders.class));
 								} catch (JSONException e) {
 									// TODO Auto-generated catch block
 									Toast.makeText(getApplicationContext(), "Error Occured [Server's JSON response might be invalid]!", Toast.LENGTH_LONG).show();
@@ -150,17 +154,17 @@ public class HomeActivity extends Activity implements OnClickListener{
 			return gson.toJson(wordList);
 		}
 		
-		public String composeJSONforCheckingOrders(String type){
+		/*public String composeJSONforCheckingOrders(String type){
 			//ArrayList<HashMap<String, String>> wordList;
 			//wordList = new ArrayList<HashMap<String, String>>();
 			ArrayList<HashMap<String, String>> mList = db.getOrderIdsOfNewOrders(type);
-			/*String mediatorId = mList.get(0).get(applicationConstants.ORDER_ID);
+			String mediatorId = mList.get(0).get(applicationConstants.ORDER_ID);
 		   
 		        	HashMap<String, String> map = new HashMap<String, String>();
 		        	
 		    		map.put("user_id", mediatorId);	    
 		    		map.put("type", type);	    		
-		        	wordList.add(map);*/
+		        	wordList.add(map);
 		       
 		    //db.close();
 			Gson gson = new GsonBuilder().create();
@@ -169,8 +173,8 @@ public class HomeActivity extends Activity implements OnClickListener{
 			return gson.toJson(mList);
 			else
 			return null;
-		}
-	public void removeAcceptedOrders(){
+		}*/
+	/*public void removeAcceptedOrders(){
 		
 		AsyncHttpClient client1 = new AsyncHttpClient();
 		RequestParams params1 = new RequestParams();
@@ -230,23 +234,16 @@ public class HomeActivity extends Activity implements OnClickListener{
 				startActivity(new Intent(getApplicationContext(),DisplayOrders.class));
 			}
 				
-		}
+		}*/
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		switch (v.getId()){
-		case R.id.order_button:
-			//sDB.getOrders();
-			int val = getOrders();
-			if(val==1){
-				Toast.makeText(getApplicationContext(), "Entering Successfully", Toast.LENGTH_LONG).show();
-			}else{
-				Toast.makeText(getApplicationContext(), "Not Entering Successfully", Toast.LENGTH_LONG).show();
-			}
+		case R.id.order_button:			
+			getOrders();			
 			break;
 		case R.id.farmer_button:
-			System.out.println("pressed farmer button");
-			
+			System.out.println("pressed farmer button");			
 			startActivity(new Intent(getApplicationContext(),Farmers.class));
 			break;
 		default:

@@ -17,10 +17,10 @@ import android.widget.TableLayout;
 import android.widget.Toast;
 
 public class FarmerRegistration extends Activity implements OnClickListener {
-	public static String F_NAME="",F_MOB="",F_STREET="",F_LANDMARK="",F_CITY="",F_STATE="",F_PINCODE="",F_KERNEL="",F_SEED="",F_FRUIT="",F_ADDRESS="";
+	public static String F_NAME="",F_MOB="",F_STREET="",F_LANDMARK="",F_CITY="",F_STATE="",F_PINCODE="",F_PULP="",F_KERNEL="",F_SEED="",F_FRUIT="",F_ADDRESS="";
 	Button btnAccept, btnReject;
 	Database db;
-	EditText f_name, f_mobile,f_city, f_state, f_pincode,f_seed,f_fruit,f_kernel,f_street,f_landmark;
+	EditText f_name, f_mobile,f_city, f_state, f_pincode,f_seed,f_fruit,f_kernel,f_pulp,f_street,f_landmark;
 	
 	@Override
     public void onCreate(Bundle savedInstanceState)
@@ -39,7 +39,7 @@ public class FarmerRegistration extends Activity implements OnClickListener {
     	f_seed = (EditText)findViewById(R.id.seed);
     	f_fruit = (EditText)findViewById(R.id.fruit);
     	f_kernel = (EditText)findViewById(R.id.kernel);
-    	
+    	f_pulp = (EditText)findViewById(R.id.pulp);;
     	
     	
     	
@@ -52,7 +52,7 @@ public class FarmerRegistration extends Activity implements OnClickListener {
     	Bundle b= editIn.getExtras();
 		if(b!=null){
 			String editFarmerId = b.getString("farmer_id");
-			Toast.makeText(getApplicationContext(), editFarmerId, Toast.LENGTH_LONG).show();
+			//Toast.makeText(getApplicationContext(), editFarmerId, Toast.LENGTH_LONG).show();
 			final ArrayList<Object> row;
 			row = db.getFarmerAsArray(editFarmerId);
 			ActionBar actionBar = getActionBar();
@@ -67,6 +67,7 @@ public class FarmerRegistration extends Activity implements OnClickListener {
 	    	f_seed.setText(row.get(1).toString());
 	    	f_kernel.setText(row.get(5).toString());
 	    	f_fruit.setText(row.get(6).toString());
+	    	f_pulp.setText(row.get(13).toString());
 	    	
 	    	btnAccept.setText(getString(R.string.change_it));
 	    	btnReject.setText(getString(R.string.reject));
@@ -241,8 +242,9 @@ public class FarmerRegistration extends Activity implements OnClickListener {
 			 String F_SEED = f_seed.getText().toString();
 			 String F_FRUIT = f_fruit.getText().toString();
 			 String F_KERNEL = f_kernel.getText().toString();
+			 String F_PULP = f_pulp.getText().toString();
 		 
-		long id = db.insertFarmer(F_NAME,F_MOB,F_SEED,F_FRUIT,F_KERNEL,F_STREET,F_LANDMARK,F_CITY,F_STATE,F_PINCODE,F_ADDRESS);
+		long id = db.insertFarmer(F_NAME,F_MOB,F_SEED,F_FRUIT,F_KERNEL,F_PULP,F_STREET,F_LANDMARK,F_CITY,F_STATE,F_PINCODE,F_ADDRESS);
 		if(id>0){
 			//----------do server synching 
 			Toast.makeText(getApplicationContext(), getString(R.string.farmer_added_successfully) ,Toast.LENGTH_SHORT).show();
@@ -266,8 +268,8 @@ public class FarmerRegistration extends Activity implements OnClickListener {
 			 String F_SEED = f_seed.getText().toString();
 			 String F_FRUIT = f_fruit.getText().toString();
 			 String F_KERNEL = f_kernel.getText().toString();
-		 
-		long id = db.updateFarmer(F_NAME,F_MOB,F_SEED,F_FRUIT,F_KERNEL,F_STREET,F_LANDMARK,F_CITY,F_STATE,F_PINCODE,F_ADDRESS,f_id);
+			 String F_PULP = f_pulp.getText().toString();
+		long id = db.updateFarmer(F_NAME,F_MOB,F_SEED,F_FRUIT,F_KERNEL,F_PULP,F_STREET,F_LANDMARK,F_CITY,F_STATE,F_PINCODE,F_ADDRESS,f_id);
 		if(id>0){
 			//----------do server synching 
 			Toast.makeText(getApplicationContext(), getString(R.string.farmer_updated_successfully) ,Toast.LENGTH_SHORT).show();
