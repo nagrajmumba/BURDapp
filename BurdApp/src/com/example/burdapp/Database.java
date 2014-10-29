@@ -422,6 +422,39 @@ public class Database {
 		}
 		return rowId;
 	}
+	
+	public long updateFarmersQty(String farmer_id, String type, String qty)
+	{							
+		// this is a key value pair holder used by android's SQLite functions
+		ContentValues values = new ContentValues(3);	
+		if(type.equals("1")){
+			values.put(applicationConstants.FARMER_KERNEL,qty);
+		}else if(type.equals("2")){
+			values.put(applicationConstants.FARMER_SEED,qty);
+		}else if(type.equals("3")){
+			values.put(applicationConstants.FARMER_FRUIT,qty);
+		}else if(type.equals("4")){
+			values.put(applicationConstants.FARMER_PULP,qty);
+		}
+		values.put(applicationConstants.FARMER_SYNCHED,"0");
+	
+		//values.put(applicationConstants.FARMER_STATUS,"no");
+		
+		long rowId=0;
+		String whereClause = applicationConstants.FARMER_ID+"="+farmer_id;
+		// ask the database object to insert the new data 
+		try{
+			rowId = db.update(applicationConstants.FARMER_TABLE,values,whereClause,null);
+			
+		}
+		catch(Exception e)
+		{
+			Log.e("DB ERROR", e.toString());
+			e.printStackTrace();
+		}
+		return rowId;
+	}
+	
 	///-----------------------Functions for order_farmers ------------------------------
 		/* get all the farmers*/
 		public ArrayList<ArrayList<Object>> getFarmersOfOrder(String order_id)
@@ -657,7 +690,7 @@ public class Database {
 	//get total available quantity as per the type
 	public String getTotalAvailableQuantity(String type){
 		Cursor cursor = null;
-		if(type.contentEquals("1"))
+		/*if(type.contentEquals("1"))
 			cursor=db.rawQuery("SELECT SUM(CAST("+ applicationConstants.FARMER_KERNEL+ " AS UNSIGNED))- SUM(CAST("+applicationConstants.FARMER_OCCUPIED_KERNEL+" AS UNSIGNED))  FROM "+applicationConstants.FARMER_TABLE+"  ",null);		
         else if(type.contentEquals("2"))
         	cursor=db.rawQuery("SELECT SUM(CAST("+ applicationConstants.FARMER_SEED+ " AS UNSIGNED))- SUM(CAST("+applicationConstants.FARMER_OCCUPIED_SEED+" AS UNSIGNED)) FROM "+applicationConstants.FARMER_TABLE+"  ",null);
@@ -665,6 +698,15 @@ public class Database {
         	cursor=db.rawQuery("SELECT SUM(CAST("+ applicationConstants.FARMER_FRUIT+ " AS UNSIGNED))- SUM(CAST("+applicationConstants.FARMER_OCCUPIED_FRUIT+" AS UNSIGNED)) FROM "+applicationConstants.FARMER_TABLE+"  ",null);
         else if(type.contentEquals("4"))
         	cursor=db.rawQuery("SELECT SUM(CAST("+ applicationConstants.FARMER_PULP+ " AS UNSIGNED))- SUM(CAST("+applicationConstants.FARMER_OCCUPIED_PULP+" AS UNSIGNED)) FROM "+applicationConstants.FARMER_TABLE+"  ",null);
+		*/
+		if(type.contentEquals("1"))
+			cursor=db.rawQuery("SELECT SUM(CAST("+ applicationConstants.FARMER_KERNEL+ " AS UNSIGNED))  FROM "+applicationConstants.FARMER_TABLE+"  ",null);		
+        else if(type.contentEquals("2"))
+        	cursor=db.rawQuery("SELECT SUM(CAST("+ applicationConstants.FARMER_SEED+ " AS UNSIGNED)) FROM "+applicationConstants.FARMER_TABLE+"  ",null);
+        else if(type.contentEquals("3"))
+        	cursor=db.rawQuery("SELECT SUM(CAST("+ applicationConstants.FARMER_FRUIT+ " AS UNSIGNED)) FROM "+applicationConstants.FARMER_TABLE+"  ",null);
+        else if(type.contentEquals("4"))
+        	cursor=db.rawQuery("SELECT SUM(CAST("+ applicationConstants.FARMER_PULP+ " AS UNSIGNED)) FROM "+applicationConstants.FARMER_TABLE+"  ",null);
 		
 		
 		cursor.moveToFirst();

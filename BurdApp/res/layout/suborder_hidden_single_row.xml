@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+	  <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="36dp" 
+        android:orientation="horizontal"
+        android:layout_marginLeft="5dip">
+        
+             <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_weight="0.67"
+                 android:text="@string/delivery_date"
+                 android:textSize="18sp" />
+             
+             <TextView 
+   	        
+   	        android:layout_width="wrap_content"
+   	        android:layout_height="wrap_content"
+   	        
+   	        android:id="@+id/delivery_date_text"
+   	        android:textSize="18sp"
+   	        />
+             
+                  <TextView 
+   	        android:layout_marginLeft="1dip"
+            
+   	        android:layout_width="1dp"
+   	        android:layout_height="25dp"
+   	        android:layout_gravity="right|center_vertical"
+   	        android:background="@drawable/divider_line"
+   	       
+   	        />
+             
+             <Button 
+                 android:id="@+id/btn_delivery_date"
+                 android:background="@drawable/calendar"
+                 
+                 android:layout_width="32dip"
+            android:layout_height="32dip"/>
+            
+            </LinearLayout>
+
+	   <LinearLayout
+	      android:layout_width="match_parent"
+	      android:layout_height="wrap_content"
+	      android:orientation="horizontal" >
+
+	      <TextView
+	          android:id="@+id/TextView03"
+	          android:layout_width="wrap_content"
+	          android:layout_height="wrap_content"
+	          android:labelFor="@+id/qty"
+	          android:text="@string/suborderqty"
+	          android:textAppearance="?android:attr/textAppearanceLarge" />
+
+	      <EditText
+	          android:id="@+id/qty"
+	          android:layout_width="wrap_content"
+	          android:layout_height="wrap_content"
+	          android:layout_weight="0.08"
+	          android:ems="10"
+	          android:inputType="number" />
+	  </LinearLayout>
+
+	 <LinearLayout
+	      android:layout_width="match_parent"
+	      android:layout_height="wrap_content"
+	      android:orientation="horizontal" >
+
+	      <TextView
+	          android:id="@+id/priceTxt"
+	          android:layout_width="wrap_content"
+	          android:layout_height="wrap_content"
+	          android:labelFor="@+id/price"
+	          android:text="@string/suborderprice"
+	          android:textAppearance="?android:attr/textAppearanceLarge" />
+
+	      <EditText
+	          android:id="@+id/price"
+	          android:layout_width="10dp"
+	          android:layout_height="wrap_content"
+	          android:layout_weight="0.08"
+	          android:ems="10"
+	          android:inputType="number" />
+	  </LinearLayout>
+
+	 <LinearLayout
+	      android:layout_width="match_parent"
+	      android:layout_height="wrap_content"
+	      android:orientation="horizontal" >
+
+	      <TextView
+	          android:id="@+id/travelTxt"
+	          android:layout_width="wrap_content"
+	          android:layout_height="wrap_content"
+	          android:labelFor="@+id/travelprice"
+	          android:text="@string/subordertravel"
+	          android:textAppearance="?android:attr/textAppearanceLarge" />
+
+	      <EditText
+	          android:id="@+id/travelprice"
+	          android:layout_width="10dp"
+	          android:layout_height="wrap_content"
+	          android:layout_weight="0.08"
+	          android:ems="10"
+	          android:inputType="number" />
+	  </LinearLayout>
+
+	  <LinearLayout
+	      android:layout_width="match_parent"
+	      android:layout_height="wrap_content"
+	      android:orientation="horizontal"
+	      android:textAlignment="center" >
+
+	      <Button
+	          android:id="@+id/phone"
+	          android:layout_width="wrap_content"
+	          android:layout_height="wrap_content"
+	          android:text="@string/call" />
+
+	      <Button
+	          android:id="@+id/button2"
+	          android:layout_width="wrap_content"
+	          android:layout_height="wrap_content"
+	          android:text="@string/delete" />
+	  </LinearLayout>
+	<LinearLayout
+	      android:layout_width="match_parent"
+	      android:layout_height="wrap_content"
+	      android:orientation="horizontal"
+	      android:textAlignment="center" >
+	  <CheckBox
+	      android:id="@+id/confirmed_it"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:text="@string/confirmed_it" />
+	</LinearLayout>
+	<LinearLayout
+	      android:layout_width="match_parent"
+	      android:layout_height="wrap_content"
+	      android:orientation="horizontal"
+	      android:textAlignment="center" >
+	  <CheckBox
+	      android:id="@+id/received_it"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+	      android:text="@string/received_it" />
+	  </LinearLayout>
+	 
+</LinearLayout>
