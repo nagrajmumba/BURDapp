@@ -8,6 +8,7 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 
@@ -16,8 +17,27 @@ public class SubOrderAssign extends Activity {
 	ExpandableListView exV;	
 	String order_id,type,order_price,order_qty,order_deldate,order_travel_cost,order_name;
 	ProgressDialog prgDialog;
-	TextView txtordername;
+	TextView txtordername, txtleftqty, txtselectedqty;
+	Button btnNext;
 	Database db;
+	final ArrayList<String> list_fids = new ArrayList<String>();
+	final ArrayList<String> list_fnames = new ArrayList<String>();
+	final ArrayList<String> list_fseeds_qty = new ArrayList<String>();
+	final ArrayList<String> list_fkernels_qty = new ArrayList<String>();
+	final ArrayList<String> list_ffruits_qty = new ArrayList<String>();
+	final ArrayList<String> list_fpulp_qty = new ArrayList<String>();
+	final ArrayList<String> list_focc_seeds_qty = new ArrayList<String>();
+	final ArrayList<String> list_focc_kernel_qty = new ArrayList<String>();
+	final ArrayList<String> list_focc_fruit_qty = new ArrayList<String>();
+	final ArrayList<String> list_focc_pulp_qty = new ArrayList<String>();
+	final ArrayList<String> list_forder_delivery = new ArrayList<String>();
+	final ArrayList<String> list_forder_qty = new ArrayList<String>();
+	final ArrayList<String> list_forder_price = new ArrayList<String>();
+	final ArrayList<String> list_forder_travel_cost = new ArrayList<String>();
+	final ArrayList<String> list_forder_ids = new ArrayList<String>();
+	final ArrayList<String> list_forder_status = new ArrayList<String>();
+	final ArrayList<String> list_forder_received = new ArrayList<String>();
+	final ArrayList<String> list_forder_confirmed = new ArrayList<String>();
 	  @Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -35,24 +55,7 @@ public class SubOrderAssign extends Activity {
 		order_name = (String) o_Details.get(1);
 		
 		ArrayList<ArrayList<Object>> array_list = null;
-    	array_list = db.getFarmersOfOrder(order_id);
-    	final ArrayList<String> list_fids = new ArrayList<String>();
-    	final ArrayList<String> list_fnames = new ArrayList<String>();
-    	final ArrayList<String> list_fseeds_qty = new ArrayList<String>();
-    	final ArrayList<String> list_fkernels_qty = new ArrayList<String>();
-    	final ArrayList<String> list_ffruits_qty = new ArrayList<String>();
-    	final ArrayList<String> list_fpulp_qty = new ArrayList<String>();
-    	final ArrayList<String> list_focc_seeds_qty = new ArrayList<String>();
-    	final ArrayList<String> list_focc_kernel_qty = new ArrayList<String>();
-    	final ArrayList<String> list_focc_fruit_qty = new ArrayList<String>();
-    	final ArrayList<String> list_focc_pulp_qty = new ArrayList<String>();
-    	final ArrayList<String> list_forder_delivery = new ArrayList<String>();
-    	final ArrayList<String> list_forder_qty = new ArrayList<String>();
-    	final ArrayList<String> list_forder_price = new ArrayList<String>();
-    	final ArrayList<String> list_forder_travel_cost = new ArrayList<String>();
-    	final ArrayList<String> list_forder_ids = new ArrayList<String>();
-    	final ArrayList<String> list_forder_status = new ArrayList<String>();
-    	final ArrayList<String> list_forder_received = new ArrayList<String>();
+    	array_list = db.getFarmersOfOrder(order_id);    	
     	
     	 for (int i = 0; i < array_list.size(); ++i) {
  	    	final ArrayList<Object> row = array_list.get(i);
@@ -79,6 +82,7 @@ public class SubOrderAssign extends Activity {
  	    	list_forder_ids.add((String) row.get(9));
  	    	list_forder_status.add((String) row.get(10));
  	    	list_forder_received.add((String) row.get(11));
+ 	    	list_forder_confirmed.add((String) row.get(17));
  	    }
     	
     	 ArrayList<String> list_quantity = new ArrayList<String>();
@@ -102,14 +106,21 @@ public class SubOrderAssign extends Activity {
 		exV= (ExpandableListView) findViewById(R.id.expandableListView1);
 		exV.setDescendantFocusability(ViewGroup.FOCUS_AFTER_DESCENDANTS);
 		txtordername = (TextView) findViewById(R.id.txtordername);
+		txtleftqty = (TextView) findViewById(R.id.quantityLeft);
+		txtselectedqty = (TextView) findViewById(R.id.selectedQuantity);
+		btnNext = (Button) findViewById(R.id.btnNext);
 		String temp = (String) txtordername.getText();
 		txtordername.setText(temp+" : "+order_name);
 		exV.setAdapter(new MyExpandbleListAdapter(this,list_fids,list_fnames,list_quantity,list_occupied_quantity,list_forder_delivery,
 												list_forder_qty,list_forder_price,list_forder_travel_cost,
-												list_forder_ids,list_forder_status,list_forder_received,order_qty,order_price,
-												order_travel_cost,order_deldate,type));
+												list_forder_ids,list_forder_status,list_forder_received,list_forder_confirmed,order_qty,order_price,
+												order_travel_cost,order_deldate,type,txtleftqty,txtselectedqty,btnNext));
+		
+		
 		
 	}
+	  
+	 
 	  
 	  public int GetPixelFromDips(float pixels) {
 		     // Get the screen's density scale 

@@ -111,6 +111,31 @@
 	          android:inputType="number" />
 	  </LinearLayout>
 
+		<LinearLayout
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:orientation="horizontal"
+		    android:textAlignment="center" >
+
+		    <TextView
+		        android:id="@+id/farmerTotalPriceTxt"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_weight="0.01"
+		        android:labelFor="@+id/travelprice"
+		        android:text="@string/farmer_total_price"
+		        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+		    <TextView
+		        android:id="@+id/farmerTotalPrice"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_weight="0.06"
+		        android:labelFor="@+id/travelprice"
+		        android:text=""
+		        android:textAppearance="?android:attr/textAppearanceLarge" />
+		</LinearLayout>
+
 	  <LinearLayout
 	      android:layout_width="match_parent"
 	      android:layout_height="wrap_content"

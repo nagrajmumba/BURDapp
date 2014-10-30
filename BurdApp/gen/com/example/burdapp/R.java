@@ -45,8 +45,8 @@ public final class R {
     public static final class id {
         public static final int LinearLayout1=0x7f09003d;
         public static final int TextView03=0x7f090051;
-        public static final int action_edit=0x7f09005a;
-        public static final int action_settings=0x7f09005b;
+        public static final int action_edit=0x7f09005c;
+        public static final int action_settings=0x7f09005d;
         public static final int address=0x7f090027;
         public static final int availableAmount=0x7f09000e;
         public static final int availableAmountTxt=0x7f09000d;
@@ -62,7 +62,7 @@ public final class R {
         public static final int checkBox1=0x7f090049;
         public static final int city=0x7f090036;
         public static final int confirm_password=0x7f090045;
-        public static final int confirmed_it=0x7f090058;
+        public static final int confirmed_it=0x7f09005a;
         public static final int delivery_date_text=0x7f09004f;
         public static final int display_farmer_list=0x7f090022;
         public static final int display_list=0x7f090014;
@@ -71,6 +71,8 @@ public final class R {
         public static final int expandableListView1=0x7f09004d;
         public static final int farmerName=0x7f090031;
         public static final int farmerQuantity=0x7f09004b;
+        public static final int farmerTotalPrice=0x7f090058;
+        public static final int farmerTotalPriceTxt=0x7f090057;
         public static final int farmer_button=0x7f090019;
         public static final int fname=0x7f09003e;
         public static final int fragment_container=0x7f090015;
@@ -102,7 +104,7 @@ public final class R {
         public static final int page=0x7f09002d;
         public static final int password=0x7f090042;
         public static final int payment=0x7f09002f;
-        public static final int phone=0x7f090057;
+        public static final int phone=0x7f090059;
         public static final int pincode=0x7f090038;
         public static final int price=0x7f090054;
         public static final int priceTxt=0x7f090053;
@@ -110,7 +112,7 @@ public final class R {
         public static final int qty=0x7f090052;
         public static final int quantityLeft=0x7f09001e;
         public static final int quantityLeftTxt=0x7f09001d;
-        public static final int received_it=0x7f090059;
+        public static final int received_it=0x7f09005b;
         public static final int register_button=0x7f090023;
         public static final int registerfarmer=0x7f090039;
         public static final int seed=0x7f09002a;
@@ -168,7 +170,7 @@ public final class R {
         public static final int accept_confirmation_msg=0x7f050019;
         /**  edit_menu_action.xml 
          */
-        public static final int action_edit=0x7f050049;
+        public static final int action_edit=0x7f05004a;
         public static final int action_settings=0x7f050002;
         public static final int add_new_farmer=0x7f050048;
         public static final int add_new_farmers=0x7f050006;
@@ -187,6 +189,7 @@ public final class R {
         public static final int farmer_not_added=0x7f050024;
         public static final int farmer_not_updated=0x7f050026;
         public static final int farmer_registration=0x7f050005;
+        public static final int farmer_total_price=0x7f050049;
         public static final int farmer_updated_successfully=0x7f050025;
         public static final int ffruit=0x7f05002c;
         public static final int fkernel=0x7f05002a;

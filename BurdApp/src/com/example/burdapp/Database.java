@@ -472,7 +472,7 @@ public class Database {
 					applicationConstants.FORDER_STATUS+","+applicationConstants.FORDER_RECEIVED+","+
 					applicationConstants.FARMER_PULP+","+applicationConstants.FARMER_OCCUPIED_KERNEL+","+
 					applicationConstants.FARMER_OCCUPIED_SEED+","+applicationConstants.FARMER_OCCUPIED_FRUIT+","+
-					applicationConstants.FARMER_OCCUPIED_PULP;
+					applicationConstants.FARMER_OCCUPIED_PULP+","+applicationConstants.FORDER_CONFIRMED;
 			
 			sqlQuery += " from "+ applicationConstants.FARMER_TABLE +","+ applicationConstants.FARMER_ORDER_TABLE;
 			sqlQuery += " where "+ applicationConstants.FORDER_ORDER_ID+"="+order_id+
@@ -524,6 +524,8 @@ public class Database {
 						dataList.add(cursor.getString(15));
 						//Log.v("address", cursor.getString(6));
 						dataList.add(cursor.getString(16));
+						//Log.v("address", cursor.getString(6));
+						dataList.add(cursor.getString(17));
 						//Log.v("address", cursor.getString(6));
 												
 						dataArrays.add(dataList);
@@ -1139,6 +1141,29 @@ public class Database {
 				e.printStackTrace();
 			}
 	}
+	public void updateFarmerOrderConfirmed(String forder_id, String confirmed_date)
+	{
+		ContentValues value = new ContentValues();	
+		//if(!received_date.equals(""))
+			value.put(applicationConstants.FORDER_CONFIRMED, confirmed_date);
+		//else
+			//value.put(applicationConstants.FORDER_RECEIVED, "");
+		
+		value.put(applicationConstants.FORDER_SYNCHED, "0");
+		
+		
+		//Cursor Fcursor = null;		
+		try {
+			String whereClause=applicationConstants.FORDER_ID+"='"+forder_id+"'";
+				int rows = db.update(applicationConstants.FARMER_ORDER_TABLE, value, whereClause, null);
+				//System.out.print(rows+" this no.of rows updated on "+ received_date +" received_date update");
+			
+			}catch (Exception e)
+			{
+				Log.e("DB ERROR", e.toString());
+				e.printStackTrace();
+			}
+	}
 	///--------------------------General functions---------------------------------
 	
 	public int getRowsCountOfTable(String tableName){
@@ -1207,7 +1232,7 @@ public class Database {
 			applicationConstants.FARMER_SYNCHED + " INTEGER DEFAULT 0" +
 			");";
 			
-			Log.e("TAG",FarmerTableQueryString);
+			//Log.e("TAG",FarmerTableQueryString);
 
 
 			db.execSQL(FarmerTableQueryString);
@@ -1226,7 +1251,8 @@ public class Database {
 			applicationConstants.FORDER_RECEIVED + " string," +
 			applicationConstants.FORDER_PAYMENT + " string," +
 			applicationConstants.FORDER_STATUS + " string," +	
-			applicationConstants.FORDER_SYNCHED + " INTEGER DEFAULT 0" +
+			applicationConstants.FORDER_SYNCHED + " INTEGER DEFAULT 0, " +
+			applicationConstants.FORDER_CONFIRMED + " string " +
 			");";
 
 			

@@ -85,6 +85,7 @@ public class applicationConstants {
 	  public static final String FORDER_RECEIVED = "forder_received";
 	  public static final String FORDER_STATUS="forder_status";
 	  public static final String FORDER_SYNCHED="forder_synched";
+	  public static final String FORDER_CONFIRMED="forder_confirmed";
 	 
 	 
 	 //------------------------MEDIATOR_TABLE------------------------------------
