@@ -15,8 +15,12 @@ import com.loopj.android.http.RequestParams;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.Fragment;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -31,23 +35,71 @@ public class HomeActivity extends Activity implements OnClickListener{
 	Fragment fragment_Order_Tab = new FragmentOrderTab();
 	Fragment fragment_Farmer_Tab = new FragmentFarmerTab();
 	Database db;
+	serverDatabase sDB;
 	int flag;
-	Button orderButton, farmerButton;
+	Button orderButton, farmerButton, syncButton;
 	ProgressDialog prgDialog;
+	
+	//-----------alarm manager ---------//
+		/*AlarmManager am;
+		public void setRepeatingAlarm() {
+			System.out.println("inside alarm");
+			  Intent intent = new Intent(this, TimeAlarm.class);
+			  PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0,
+			    intent, PendingIntent.FLAG_CANCEL_CURRENT);
+			  am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(),
+			    (20 * 1000), pendingIntent);
+			 }*/
+		
+		
+		//--variable for notification manager----///
+		//Notification message ID
+		 private static final int NOTIFY_ME_ID=1337;
+		//Counter
+		 private int count=0;
+		//Create NotificationManager  object
+		 private NotificationManager notifyMgr=null;
+		
+		 //-trigger for notifiction function.............
+		 
+		
+		 
+		/* public void clearNotification(View v) {
+			 //Clear the notification 
+			notifyMgr.cancel(NOTIFY_ME_ID);
+		}*/
 	 @Override
 	    public void onCreate(Bundle savedInstanceState)
 	    {	
 	    	
 	    	super.onCreate(savedInstanceState);
 	    	setContentView(R.layout.activity_home);
+	    	
+	    	//setting alarm for notifications
+	    	//notifyMgr=(NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+	    	//getApplicationContext();
+			//am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+	    	//setRepeatingAlarm();
+	    	
+	    	
 	    	orderButton = (Button)findViewById(R.id.order_button);
 	    	farmerButton = (Button)findViewById(R.id.farmer_button);
+	    	syncButton = (Button)findViewById(R.id.sync_button);
+	    	sDB = new serverDatabase(getApplicationContext());
 	    	
 	    	orderButton.setOnClickListener(this);
-	    	farmerButton.setOnClickListener(this);	  
+	    	farmerButton.setOnClickListener(this);
+	    	syncButton.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View arg0) {
+					// TODO Auto-generated method stub
+					sDB.onUpSync(1);
+				}
+			});
 	    	
 	    	//code related to action bar and the tabs 
-	    	 ActionBar actionBar = getActionBar();
+	    	 /*ActionBar actionBar = getActionBar();
 	         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 	         
 	         orderTab = actionBar.newTab().setText(getString(R.string.list_of_orders));
@@ -58,7 +110,7 @@ public class HomeActivity extends Activity implements OnClickListener{
 	         farmerTab.setTabListener(new MyTabListener(fragment_Farmer_Tab));	         
 	         
 	         actionBar.addTab(orderTab);
-	         actionBar.addTab(farmerTab);
+	         actionBar.addTab(farmerTab);*/
 	         
 	         
 	         db = new Database(this);
@@ -66,6 +118,9 @@ public class HomeActivity extends Activity implements OnClickListener{
 	 	   
 			
 	 	    flag=0;
+	 	    
+	 	    
+	 	  
 	    }
 	 
 	 public int getOrders(){

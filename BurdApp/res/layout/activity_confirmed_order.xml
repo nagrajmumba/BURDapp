@@ -8,7 +8,8 @@
         android:id="@+id/order_details"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Large Text"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="@string/order_details"
         android:textAlignment="center"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -23,7 +24,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_marginLeft="16dp"
-            android:text="Medium Text"
+            android:text="@string/order_id"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
@@ -171,7 +172,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:text="Large Text"
+            android:text="@string/available_quantities"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TextView

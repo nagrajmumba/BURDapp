@@ -370,7 +370,7 @@ public class Database {
 		values.put(applicationConstants.FARMER_STATE,state);
 		values.put(applicationConstants.FARMER_PINCODE,pincode);
 		values.put(applicationConstants.FARMER_ADDRESS,address);
-		//values.put(applicationConstants.FARMER_STATUS,"no");
+		values.put(applicationConstants.FARMER_SYNCHED,"0");
 		
 		long rowId=0;
  
@@ -407,6 +407,7 @@ public class Database {
 		values.put(applicationConstants.FARMER_PINCODE,pincode);
 		values.put(applicationConstants.FARMER_ADDRESS,address);
 		//values.put(applicationConstants.FARMER_STATUS,"no");
+		values.put(applicationConstants.FARMER_SYNCHED,"0");
 		
 		long rowId=0;
 		String whereClause = applicationConstants.FARMER_ID+"="+f_id;
@@ -556,6 +557,7 @@ public class Database {
 		// this is a key value pair holder used by android's SQLite functions
 		ContentValues values = new ContentValues(1);	
 		values.put(applicationConstants.ORDER_STATUS,status);
+		values.put(applicationConstants.ORDER_SYNCHED,"0");
 	
 		//values.put(applicationConstants.FARMER_STATUS,"no");
 		
@@ -580,7 +582,7 @@ public class Database {
 		values.put(applicationConstants.ORDER_ACCEPTED_BY,mediator_id);
 		values.put(applicationConstants.ORDER_NEW,"0");
 		values.put(applicationConstants.ORDER_VIEW,"1");
-	
+		values.put(applicationConstants.ORDER_SYNCHED,"0");
 		//values.put(applicationConstants.FARMER_STATUS,"no");
 		
 		long rowId=0;
@@ -597,7 +599,7 @@ public class Database {
 		}
 		return rowId;
 	}
-	public void updateOccupiedQuantity(String f_id, String type, String qty, String add_or_sub_flag){
+	/*public void updateOccupiedQuantity(String f_id, String type, String qty, String add_or_sub_flag){
 		Cursor cursor = null, fcursor =null;
 		ArrayList<ArrayList<Object>> dataArrays = new ArrayList<ArrayList<Object>>();
 		cursor = db.rawQuery("SELECT "+applicationConstants.FORDER_ID+","+applicationConstants.FORDER_ORDER_ID+","+
@@ -681,7 +683,7 @@ public class Database {
 				e.printStackTrace();
 			}
 		
-	}
+	}*/
 	public int deleteOrder(String order_id){
 		
 		String whereClause = applicationConstants.ORDER_ID +"="+order_id;
@@ -1038,7 +1040,55 @@ public class Database {
 			e.printStackTrace();
 		}
 	}
+	public void updateFarmerOrderSynched()
+	{
+		ContentValues value = new ContentValues();		
+		//value.put(applicationConstants.FORDER_QUANTITY, qty);
+		value.put(applicationConstants.FORDER_SYNCHED, "0");
+		
+		
+		//Cursor Fcursor = null;		
+		try {
+	       		//String whereClause=applicationConstants.FORDER_ID+"='"+forder_id+"'";
+				int rows = db.update(applicationConstants.FARMER_ORDER_TABLE, value, null, null);
+				
+				Cursor cursor = db.rawQuery("select * from "+applicationConstants.FARMER_ORDER_TABLE, null);
+				System.out.print(rows+" this no.of rows updated on qty update:::"+cursor.getCount());
+				if(cursor.moveToFirst()){
+					do{
+						System.out.println("id:"+cursor.getString(0)+"--synche:"+cursor.getString(11));
+					}while(cursor.moveToNext());
+				}
+			
+			}catch (Exception e)
+			{
+				Log.e("DB ERROR", e.toString());
+				e.printStackTrace();
+			}
+	}
 	
+	public void updateOrderShipment(String order_id, String sent_by_mediator_date, String will_be_reacched_by_date)
+	{
+		ContentValues value = new ContentValues();		
+		//value.put(applicationConstants.FORDER_QUANTITY, qty);
+		value.put(applicationConstants.ORDER_SENT_BY_MEDIATOR, sent_by_mediator_date);
+		value.put(applicationConstants.ORDER_WILL_BE_REACHED_BY, will_be_reacched_by_date);
+		value.put(applicationConstants.ORDER_SYNCHED, "0");
+		
+		
+		//Cursor Fcursor = null;		
+		try {
+	       		String whereClause=applicationConstants.ORDER_ID+"='"+order_id+"'";
+				int rows = db.update(applicationConstants.ORDER_TABLE, value, null, null);
+				
+				
+			
+			}catch (Exception e)
+			{
+				Log.e("DB ERROR", e.toString());
+				e.printStackTrace();
+			}
+	}
 	public void updateFarmerOrderQty(String forder_id, String qty)
 	{
 		ContentValues value = new ContentValues();		
@@ -1203,7 +1253,9 @@ public class Database {
 										applicationConstants.ORDER_BALANCE_QUANTITY + " string, " +
 										applicationConstants.ORDER_NEW + " INTEGER DEFAULT 0, " +
 										applicationConstants.ORDER_VIEW + " INTEGER DEFAULT 0, " +
-										applicationConstants.ORDER_SYNCHED + " INTEGER DEFAULT 0 " +
+										applicationConstants.ORDER_SYNCHED + " INTEGER DEFAULT 0, " +
+										applicationConstants.ORDER_SENT_BY_MEDIATOR + " string, " +
+										applicationConstants.ORDER_WILL_BE_REACHED_BY + " string " +										
 										");";
 			// execute the query string to the database.
 			db.execSQL(newTableQueryString);

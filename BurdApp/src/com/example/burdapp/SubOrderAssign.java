@@ -5,8 +5,11 @@ import java.util.ArrayList;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ExpandableListView;
@@ -17,7 +20,7 @@ public class SubOrderAssign extends Activity {
 	ExpandableListView exV;	
 	String order_id,type,order_price,order_qty,order_deldate,order_travel_cost,order_name;
 	ProgressDialog prgDialog;
-	TextView txtordername, txtleftqty, txtselectedqty;
+	TextView txtordername, txtleftqty, txtselectedqty, txtorderqty;
 	Button btnNext;
 	Database db;
 	final ArrayList<String> list_fids = new ArrayList<String>();
@@ -108,6 +111,8 @@ public class SubOrderAssign extends Activity {
 		txtordername = (TextView) findViewById(R.id.txtordername);
 		txtleftqty = (TextView) findViewById(R.id.quantityLeft);
 		txtselectedqty = (TextView) findViewById(R.id.selectedQuantity);
+		txtorderqty = (TextView) findViewById(R.id.orderQuantity);
+		txtorderqty.setText(order_qty);
 		btnNext = (Button) findViewById(R.id.btnNext);
 		String temp = (String) txtordername.getText();
 		txtordername.setText(temp+" : "+order_name);
@@ -115,6 +120,20 @@ public class SubOrderAssign extends Activity {
 												list_forder_qty,list_forder_price,list_forder_travel_cost,
 												list_forder_ids,list_forder_status,list_forder_received,list_forder_confirmed,order_qty,order_price,
 												order_travel_cost,order_deldate,type,txtleftqty,txtselectedqty,btnNext));
+		
+		btnNext.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				db.updateOrderStatus("4", order_id);
+    	    	Bundle b = new Bundle();
+	   	    	b.putString(applicationConstants.ORDER_ID,order_id);
+	   	    	Intent in = new Intent(getApplicationContext(), ShipmentDetailsPage.class);			   	    	
+	   	    	in.putExtras(b);
+	   	    	startActivity(in);
+			}
+		});
 		
 		
 		

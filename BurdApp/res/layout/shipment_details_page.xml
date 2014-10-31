@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="@string/shipmentDetails"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/statusText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="36dp" 
+        android:orientation="horizontal"
+        android:layout_marginLeft="5dip">
+        
+             <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_weight="0.67"
+                 android:text="@string/shipment_sent_date"
+                 android:textSize="18sp" />
+             
+             <TextView 
+   	        
+   	        android:layout_width="wrap_content"
+   	        android:layout_height="wrap_content"
+   	        
+   	        android:id="@+id/delivery_sent_date_text"
+   	        android:textSize="18sp"
+   	        />
+             
+                  <TextView 
+   	        android:layout_marginLeft="1dip"
+            
+   	        android:layout_width="1dp"
+   	        android:layout_height="25dp"
+   	        android:layout_gravity="right|center_vertical"
+   	        android:background="@drawable/divider_line"
+   	       
+   	        />
+             
+             <Button 
+                 android:id="@+id/btn_sent_date"
+                 android:background="@drawable/calendar"
+                 
+                 android:layout_width="32dip"
+            android:layout_height="32dip"/>
+            
+            </LinearLayout>
+            <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="36dp" 
+        android:orientation="horizontal"
+        android:layout_marginLeft="5dip">
+        
+             <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_weight="0.67"
+                 android:text="@string/shipment_approximate_delvery_date"
+                 android:textSize="18sp" />
+             
+             <TextView 
+   	        
+   	        android:layout_width="wrap_content"
+   	        android:layout_height="wrap_content"
+   	        
+   	        android:id="@+id/approximate_delivery_date_text"
+   	        android:textSize="18sp"
+   	        />
+             
+                  <TextView 
+   	        android:layout_marginLeft="1dip"
+            
+   	        android:layout_width="1dp"
+   	        android:layout_height="25dp"
+   	        android:layout_gravity="right|center_vertical"
+   	        android:background="@drawable/divider_line"
+   	       
+   	        />
+             
+             <Button 
+                 android:id="@+id/btn_approximate_delivery_date"
+                 android:background="@drawable/calendar"
+                 
+                 android:layout_width="32dip"
+            android:layout_height="32dip"/>
+            
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnOrderClose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:text="@string/order_closed" />
+
+</LinearLayout>

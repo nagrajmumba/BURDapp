@@ -128,11 +128,11 @@ public class AssignFarmers extends Activity {
 		    	    		
 		    	    		int f_qty = 0;
 		    	    		if(type.equals("1"))
-		    	    			f_qty= Integer.valueOf(f_det.get(2).toString());
+		    	    			f_qty= Integer.valueOf(f_det.get(5).toString());
 		    		    	else if(type.equals("2"))
 		    		    		f_qty= Integer.valueOf(f_det.get(1).toString());
 		    		    	else if(type.equals("3"))
-		    		    		f_qty= Integer.valueOf(f_det.get(3).toString());
+		    		    		f_qty= Integer.valueOf(f_det.get(6).toString());
 		    		    	else if(type.equals("4"))
 		    		    		f_qty= Integer.valueOf(f_det.get(13).toString());
 		    	    		
@@ -147,7 +147,8 @@ public class AssignFarmers extends Activity {
 	    	    			}
 		    	    		int price_distribution = sub_order_price - 3;
 		    	    		db.assignFarmersToOrder(order_id,SelectedBox.get(i),Integer.toString(qty_distribution),Integer.toString(price_distribution),sub_order_date);
-		    	    		db.updateFarmersQty(SelectedBox.get(i),type,Integer.toString(qty_distribution));
+		    	    		int deducted_farmer_qty = f_qty - qty_distribution;
+		    	    		db.updateFarmersQty(SelectedBox.get(i),type,Integer.toString(deducted_farmer_qty));
 		    	    	}
 		    	    	//update status
 		    	    	//long rowId = db.updateOrderStatus("2",order_id);

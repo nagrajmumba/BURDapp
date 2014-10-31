@@ -34,7 +34,8 @@ public class applicationConstants {
 	  public static final String ORDER_NEW = "order_new";
 	  public static final String ORDER_VIEW = "order_view";
 	  public static final String ORDER_SYNCHED = "order_synched";
-	 
+	  public static final String ORDER_SENT_BY_MEDIATOR = "order_sent_by_mediator";
+	  public static final String ORDER_WILL_BE_REACHED_BY = "order_will_be_reached_by";
 	//------------ORDER ACCEPTED TABLE -------------------------
 		/* public static final String ORDER_ACCEPTED_TABLE = "order_accepted_table";
 		  public static final String ORDER_ACCEPTED_ID = "accepted_id";
