@@ -61,11 +61,22 @@ public class NewOrderDetails extends Activity implements OnClickListener{
 		btnReject.setOnClickListener(this);
 		
 		orderName.setText((CharSequence) o_Details.get(1));
-		orderType.setText((CharSequence) o_Details.get(6));
-		orderQuantity.setText((CharSequence) o_Details.get(3));
-		orderPrice.setText((CharSequence) o_Details.get(4));
+		String strTyp="";
+		if(o_Details.get(6).equals("1")){
+    		strTyp = getString(R.string.kernel);
+    	}else if(o_Details.get(6).equals("2")){
+    		strTyp = getString(R.string.seed);
+    	}else if(o_Details.get(6).equals("3")){
+    		strTyp = getString(R.string.fruit);
+    	}else if(o_Details.get(6).equals("4")){
+    		strTyp = getString(R.string.pulp);
+    	}
+		
+		orderType.setText(strTyp);
+		orderQuantity.setText((CharSequence) o_Details.get(3)+" "+getString(R.string.kilo));
+		orderPrice.setText((CharSequence) o_Details.get(4)+" "+getString(R.string.rupee_per_kg));
 		orderDelivery.setText((CharSequence) o_Details.get(7));
-		availableQuantity.setText(total);
+		availableQuantity.setText(total+" "+getString(R.string.kilo));
 		
 		prgDialog = new ProgressDialog(this);
  	    prgDialog.setMessage("Please wait...");

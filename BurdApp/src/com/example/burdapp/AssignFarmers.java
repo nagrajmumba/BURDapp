@@ -23,6 +23,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.graphics.Color;
 import android.util.*;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,11 +57,13 @@ public class AssignFarmers extends Activity {
 	  protected void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.activity_select_farmers);
+	    
 	    prgDialog = new ProgressDialog(this);
 	    flag=0;
 	    db = new Database(this);
 	    Bundle b = getIntent().getExtras();
 		order_id = b.getString(applicationConstants.ORDER_ID);
+		db.updateOrderStatus("1", order_id);
 		final ArrayList<Object> o_Details = db.getOrderById(order_id);
 		// type of produce
 		type = (String) o_Details.get(6);
@@ -77,9 +80,10 @@ public class AssignFarmers extends Activity {
 	    	left_qty = (TextView) findViewById(R.id.quantityLeft);
 	    	selected_qty = (TextView) findViewById(R.id.selectedQuantity);
 	    	
-	    	ord_qty.setText(order_qty);
-	    	left_qty.setText(order_qty);
-	    	selected_qty.setText("000");
+	    	ord_qty.setText(order_qty+" "+getString(R.string.kilo));
+	    	left_qty.setTextColor(Color.parseColor("#FF3333"));
+	    	left_qty.setText(order_qty+" "+getString(R.string.kilo));
+	    	selected_qty.setText("000"+" "+getString(R.string.kilo));
 	    	
 	    	
 	    	btnOk = (Button) findViewById(R.id.btnNext);	
@@ -292,7 +296,7 @@ public class AssignFarmers extends Activity {
 	    	}
 	    	
 	    	holder.txtName.setText(listNames.get(position));
-	    	holder.txtQuantity.setText(listQuantity.get(position)+" Kgs");
+	    	holder.txtQuantity.setText(listQuantity.get(position)+" "+getString(R.string.kilo));
 	    	holder.im.setOnClickListener(new View.OnClickListener() {
 	    	    @Override
 	    	    public void onClick(View v) {
@@ -330,12 +334,17 @@ public class AssignFarmers extends Activity {
 	    	        }
 	    	        int l_qty = Integer.valueOf(order_qty)-totalQty;
 	    	        if(l_qty<=0){
-	    	        	left_qty.setText("00");
+	    	        	left_qty.setTextColor(Color.parseColor("#0099FF"));
+	    	        	left_qty.setText("000"+" "+getString(R.string.kilo));
 	    	        }else{
-	    	        	left_qty.setText(Integer.toString(l_qty));
+	    	        	left_qty.setText(Integer.toString(l_qty)+" "+getString(R.string.kilo));
 	    	        }
-	    	        
-	    	         selected_qty.setText(Integer.toString(totalQty));
+	    	        if(totalQty <= 0){
+	    	        	
+	    	        	selected_qty.setText("000"+" "+getString(R.string.kilo));
+	    	        }else{
+	    	        	selected_qty.setText(Integer.toString(totalQty)+" "+getString(R.string.kilo));
+	    	        }
 	    	    }
 
 				

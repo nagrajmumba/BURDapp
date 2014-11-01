@@ -10,6 +10,7 @@
 	<string name="farmer_registration">किसान का पंजीकरण</string>
 	<string name="add_new_farmers">नया किसान जोड़े</string>
 	
+	
 	<!-- Inside new_farmer_registration.xml -->
 	<string name="personal_details">व्यक्तिगत जानकारी</string>
 	<string name="full_name">पूरा नाम</string>
@@ -29,6 +30,7 @@
 	<string name="fpulp">pulp</string>
 	<string name="accept">स्वीकार</string>
 	<string name="reject">रद</string>
+	<string name="rupee_per_kg">Rs/kg</string>
 	<!-- confirmation message for choosing yes or no  -->
 	<string name="accept_confirmation_msg">क्या आप किसान को जोड़ना चाहते है ?</string>
 	<string name="accept_confirmation_for_edit_msg">क्या आप अपनी जानकारी बदलना चाहते है ?</string>

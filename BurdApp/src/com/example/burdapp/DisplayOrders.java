@@ -21,6 +21,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.graphics.Color;
 import android.util.*;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,6 +61,8 @@ public class DisplayOrders extends Activity {
 	    final ArrayList<String> list_ids = new ArrayList<String>();
 	    final ArrayList<String> list_status = new ArrayList<String>();
 	    final ArrayList<String> list_names = new ArrayList<String>();
+	    final ArrayList<String> list_qty = new ArrayList<String>();
+	    final ArrayList<String> list_type = new ArrayList<String>();
 	    
 	    //listA = new List<String>();
 	    for (int i = 0; i < array_list.size(); ++i) {
@@ -67,14 +70,15 @@ public class DisplayOrders extends Activity {
 	    	list_ids.add((String) row.get(0));//order id
 	    	list_status.add((String) row.get(9));//order status
 	    	list_names.add((String) row.get(1));//order names
+	    	list_qty.add((String) row.get(3));//order qty
+	    	list_type.add((String) row.get(6));//order type
+	    	if(row.get(9).equals("0")|| row.get(9)==null ){
 	    	
-	    	if(row.get(11).equals("1")){
-	    		
 	    	}
 	    }
 	   
 	    
-	    final StableArrayAdapter lAdapter = new StableArrayAdapter(this,android.R.layout.simple_spinner_dropdown_item,list_names);
+	    final StableArrayAdapter lAdapter = new StableArrayAdapter(this,android.R.layout.simple_spinner_dropdown_item,list_names,list_status,list_qty,list_type);
 	    listview.setAdapter((ListAdapter) lAdapter);
 	    
 	    listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -221,12 +225,15 @@ public void confirmOrderOnServer(final String order_id){
 
 	    //HashMap<String, Integer> mIdMap = new HashMap<String, Integer>();
 	    Context context;
-	    ArrayList<String> listNames;
+	    ArrayList<String> listNames,listStatus,listQty,listType;
 	    public StableArrayAdapter(Context context, int textViewResourceId,
-	    		ArrayList<String> listN) {
+	    		ArrayList<String> listN,ArrayList<String> listStatus,ArrayList<String> listQty,ArrayList<String> listType) {
 	      super(context, textViewResourceId, listN);
 	      this.context = context;
 	      this.listNames = listN;
+	      this.listStatus = listStatus;
+	      this.listQty = listQty;
+	      this.listType = listType;
 	    }
 
 	    /*public void notifyDataSetChanged() {
@@ -252,8 +259,21 @@ public void confirmOrderOnServer(final String order_id){
 	    		holder = (MyViewHolder) row.getTag();
 	    		
 	    	}
-	    	
-	    	holder.textV.setText(listNames.get(position));
+	    	String strTyp ="";
+	    	if(listType.get(position).equals("1")){
+	    		strTyp = getString(R.string.kernel);
+	    	}else if(listType.get(position).equals("2")){
+	    		strTyp = getString(R.string.seed);
+	    	}else if(listType.get(position).equals("3")){
+	    		strTyp = getString(R.string.fruit);
+	    	}else if(listType.get(position).equals("4")){
+	    		strTyp = getString(R.string.pulp);
+	    	}
+	    	holder.textV.setTextSize(18);
+	    	holder.textV.setText(listNames.get(position)+"       "+strTyp+"    "+listQty.get(position)+" "+getString(R.string.kilo));
+	    	if(listStatus.get(position).equals("0") ||listStatus.get(position)== null){
+	    		row.setBackgroundColor(Color.parseColor("#99CCFF"));
+	    	}
 	    	return row;
 	    }
 	    
