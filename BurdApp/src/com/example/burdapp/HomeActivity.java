@@ -41,15 +41,15 @@ public class HomeActivity extends Activity implements OnClickListener{
 	ProgressDialog prgDialog;
 	
 	//-----------alarm manager ---------//
-		/*AlarmManager am;
+		AlarmManager am;
 		public void setRepeatingAlarm() {
 			System.out.println("inside alarm");
 			  Intent intent = new Intent(this, TimeAlarm.class);
 			  PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0,
 			    intent, PendingIntent.FLAG_CANCEL_CURRENT);
 			  am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(),
-			    (20 * 1000), pendingIntent);
-			 }*/
+			    (15 * 60 * 1000), pendingIntent);
+			 }
 		
 		
 		//--variable for notification manager----///
@@ -64,10 +64,10 @@ public class HomeActivity extends Activity implements OnClickListener{
 		 
 		
 		 
-		/* public void clearNotification(View v) {
+		public void clearNotification(View v) {
 			 //Clear the notification 
 			notifyMgr.cancel(NOTIFY_ME_ID);
-		}*/
+		}
 	 @Override
 	    public void onCreate(Bundle savedInstanceState)
 	    {	
@@ -76,10 +76,10 @@ public class HomeActivity extends Activity implements OnClickListener{
 	    	setContentView(R.layout.activity_home);
 	    	
 	    	//setting alarm for notifications
-	    	//notifyMgr=(NotificationManager)getSystemService(NOTIFICATION_SERVICE);
-	    	//getApplicationContext();
-			//am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-	    	//setRepeatingAlarm();
+	    	notifyMgr=(NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+	    	getApplicationContext();
+			am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+	    	setRepeatingAlarm();
 	    	
 	    	
 	    	orderButton = (Button)findViewById(R.id.order_button);
@@ -127,7 +127,7 @@ public class HomeActivity extends Activity implements OnClickListener{
 						
 			AsyncHttpClient client = new AsyncHttpClient();
 			RequestParams params = new RequestParams();
-			 	prgDialog.setMessage("Synching SQLite Data with Remote MySQL DB. Please wait...");
+			 	prgDialog.setMessage("Synching "+getString(R.string.please_wait));
 				prgDialog.setCancelable(false);		
 					prgDialog.show();
 					params.put("mediatorJSON", composeJSONforMediator("getOrders"));
@@ -151,7 +151,7 @@ public class HomeActivity extends Activity implements OnClickListener{
 										}
 									}
 									db.removeUnwantedOrders(id_list);
-									Toast.makeText(getApplicationContext(), "All the orders have been downloaded", Toast.LENGTH_LONG).show();
+									Toast.makeText(getApplicationContext(), getString(R.string.all_order_downloaded), Toast.LENGTH_LONG).show();
 									//startActivity(new Intent(getApplicationContext(),DisplayOrders.class));
 									//removeAcceptedOrders();
 									flag=1;			

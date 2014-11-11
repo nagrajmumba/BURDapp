@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_height="fill_parent"   
     android:orientation="vertical" >
 
 	  <LinearLayout
@@ -45,7 +45,7 @@
             
             </LinearLayout>
 
-	   <LinearLayout
+	   <RelativeLayout
 	      android:layout_width="match_parent"
 	      android:layout_height="wrap_content"
 	      android:orientation="horizontal" >
@@ -54,20 +54,37 @@
 	          android:id="@+id/TextView03"
 	          android:layout_width="wrap_content"
 	          android:layout_height="wrap_content"
+	          android:layout_alignBottom="@+id/textView1"
+	          android:layout_alignParentLeft="true"
+	          android:layout_marginLeft="32dp"
 	          android:labelFor="@+id/qty"
 	          android:text="@string/suborderqty"
 	          android:textAppearance="?android:attr/textAppearanceLarge" />
 
-	      <EditText
-	          android:id="@+id/qty"
+	      <TextView
+	          android:id="@+id/textView1"
 	          android:layout_width="wrap_content"
 	          android:layout_height="wrap_content"
-	          android:layout_weight="0.08"
+	          android:layout_alignBaseline="@+id/qty"
+	          android:layout_alignBottom="@+id/qty"
+	          android:layout_alignParentRight="true"
+	          android:layout_marginRight="15dp"
+	          android:text="@string/kilo"
+	          android:textAppearance="?android:attr/textAppearanceMedium" />
+
+	      <EditText
+	          android:id="@+id/qty"
+	          android:layout_width="152dp"
+	          android:layout_height="wrap_content"
+	          android:layout_alignParentTop="true"
+	          android:layout_marginRight="14dp"
+	          android:layout_toLeftOf="@+id/textView1"
 	          android:ems="10"
 	          android:inputType="number" />
-	  </LinearLayout>
 
-	 <LinearLayout
+	  </RelativeLayout>
+
+	 <RelativeLayout
 	      android:layout_width="match_parent"
 	      android:layout_height="wrap_content"
 	      android:orientation="horizontal" >
@@ -76,20 +93,40 @@
 	          android:id="@+id/priceTxt"
 	          android:layout_width="wrap_content"
 	          android:layout_height="wrap_content"
+	          android:layout_alignParentLeft="true"
+	          android:layout_centerVertical="true"
+	          android:layout_marginLeft="35dp"
 	          android:labelFor="@+id/price"
 	          android:text="@string/suborderprice"
 	          android:textAppearance="?android:attr/textAppearanceLarge" />
 
 	      <EditText
 	          android:id="@+id/price"
-	          android:layout_width="10dp"
+	          android:layout_width="152dp"
 	          android:layout_height="wrap_content"
+	          android:layout_alignParentTop="true"
+	          android:layout_toLeftOf="@+id/textView2"
 	          android:layout_weight="0.08"
 	          android:ems="10"
-	          android:inputType="number" />
-	  </LinearLayout>
+	          android:inputType="number" >
 
-	 <LinearLayout
+	          <requestFocus />
+	      </EditText>
+
+	      <TextView
+	          android:id="@+id/textView2"
+	          android:layout_width="wrap_content"
+	          android:layout_height="wrap_content"
+	          android:layout_alignBaseline="@+id/price"
+	          android:layout_alignBottom="@+id/price"
+	          android:layout_alignParentRight="true"
+	          android:layout_marginRight="16dp"
+	          android:text="@string/rupee_per_kg"
+	          android:textAppearance="?android:attr/textAppearanceMedium" />
+
+	  </RelativeLayout>
+
+	 <RelativeLayout
 	      android:layout_width="match_parent"
 	      android:layout_height="wrap_content"
 	      android:orientation="horizontal" >
@@ -102,16 +139,30 @@
 	          android:text="@string/subordertravel"
 	          android:textAppearance="?android:attr/textAppearanceLarge" />
 
+	      <TextView
+	          android:id="@+id/TextView01"
+	          android:layout_width="wrap_content"
+	          android:layout_height="wrap_content"
+	          android:layout_alignParentRight="true"
+	          android:layout_centerVertical="true"
+	          android:layout_marginRight="15dp"
+	          android:text="@string/rupee"
+	          android:textAppearance="?android:attr/textAppearanceMedium" />
+
 	      <EditText
 	          android:id="@+id/travelprice"
-	          android:layout_width="10dp"
+	          android:layout_width="152dp"
 	          android:layout_height="wrap_content"
+	          android:layout_alignParentTop="true"
+	          android:layout_marginRight="20dp"
+	          android:layout_toLeftOf="@+id/TextView01"
 	          android:layout_weight="0.08"
 	          android:ems="10"
 	          android:inputType="number" />
-	  </LinearLayout>
 
-		<LinearLayout
+	  </RelativeLayout>
+
+		<RelativeLayout
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"
 		    android:orientation="horizontal"
@@ -121,39 +172,65 @@
 		        android:id="@+id/farmerTotalPriceTxt"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
+		        android:layout_alignParentLeft="true"
+		        android:layout_alignParentTop="true"
+		        android:layout_marginLeft="18dp"
 		        android:layout_weight="0.01"
 		        android:labelFor="@+id/travelprice"
 		        android:text="@string/farmer_total_price"
 		        android:textAppearance="?android:attr/textAppearanceLarge" />
 
 		    <TextView
-		        android:id="@+id/farmerTotalPrice"
+		        android:id="@+id/TextView02"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
+		        android:layout_alignParentRight="true"
+		        android:layout_centerVertical="true"
+		        android:layout_marginRight="15dp"
+		        android:text="@string/rupee"
+		        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+		    <TextView
+		        android:id="@+id/farmerTotalPrice"
+		        android:layout_width="70dp"
+		        android:layout_height="wrap_content"
+		        android:layout_alignParentTop="true"
+		        android:layout_marginRight="14dp"
+		        android:layout_toLeftOf="@+id/TextView02"
 		        android:layout_weight="0.06"
 		        android:labelFor="@+id/travelprice"
-		        android:text=""
-		        android:textAppearance="?android:attr/textAppearanceLarge" />
-		</LinearLayout>
+		        android:textAppearance="?android:attr/textAppearanceLarge"
+		        android:textColor="#99CCFF" />
 
-	  <LinearLayout
+		</RelativeLayout>
+
+	  <RelativeLayout
 	      android:layout_width="match_parent"
 	      android:layout_height="wrap_content"
 	      android:orientation="horizontal"
 	      android:textAlignment="center" >
 
 	      <Button
-	          android:id="@+id/phone"
-	          android:layout_width="wrap_content"
-	          android:layout_height="wrap_content"
-	          android:text="@string/call" />
-
-	      <Button
 	          android:id="@+id/button2"
 	          android:layout_width="wrap_content"
 	          android:layout_height="wrap_content"
+	          android:layout_alignParentRight="true"
+	          android:layout_alignParentTop="true"
+	          android:layout_marginRight="33dp"
+	          android:enabled="false"
 	          android:text="@string/delete" />
-	  </LinearLayout>
+
+	      <Button
+	          android:id="@+id/phone"
+	          android:layout_width="wrap_content"
+	          android:layout_height="wrap_content"
+	          android:layout_alignParentLeft="true"
+	          android:layout_alignParentTop="true"
+	          android:layout_marginLeft="33dp"
+	          android:enabled="false"
+	          android:text="@string/call" />
+
+	  </RelativeLayout>
 	<LinearLayout
 	      android:layout_width="match_parent"
 	      android:layout_height="wrap_content"

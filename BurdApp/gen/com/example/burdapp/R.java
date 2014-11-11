@@ -45,9 +45,11 @@ public final class R {
     }
     public static final class id {
         public static final int LinearLayout1=0x7f09003e;
+        public static final int TextView01=0x7f09005e;
+        public static final int TextView02=0x7f090060;
         public static final int TextView03=0x7f090058;
-        public static final int action_edit=0x7f090063;
-        public static final int action_settings=0x7f090064;
+        public static final int action_edit=0x7f090065;
+        public static final int action_settings=0x7f090066;
         public static final int address=0x7f090028;
         public static final int approximate_delivery_date_text=0x7f09004c;
         public static final int availableAmount=0x7f09000e;
@@ -67,7 +69,7 @@ public final class R {
         public static final int checkBox1=0x7f090050;
         public static final int city=0x7f090037;
         public static final int confirm_password=0x7f090046;
-        public static final int confirmed_it=0x7f090061;
+        public static final int confirmed_it=0x7f090063;
         public static final int delivery_date_text=0x7f090056;
         public static final int delivery_sent_date_text=0x7f09004a;
         public static final int display_farmer_list=0x7f090023;
@@ -77,8 +79,8 @@ public final class R {
         public static final int expandableListView1=0x7f090054;
         public static final int farmerName=0x7f090032;
         public static final int farmerQuantity=0x7f090052;
-        public static final int farmerTotalPrice=0x7f09005f;
-        public static final int farmerTotalPriceTxt=0x7f09005e;
+        public static final int farmerTotalPrice=0x7f090061;
+        public static final int farmerTotalPriceTxt=0x7f09005f;
         public static final int farmer_button=0x7f090019;
         public static final int fname=0x7f09003f;
         public static final int fragment_container=0x7f090015;
@@ -110,7 +112,7 @@ public final class R {
         public static final int page=0x7f09002e;
         public static final int password=0x7f090043;
         public static final int payment=0x7f090030;
-        public static final int phone=0x7f090060;
+        public static final int phone=0x7f090062;
         public static final int pincode=0x7f090039;
         public static final int price=0x7f09005b;
         public static final int priceTxt=0x7f09005a;
@@ -118,7 +120,7 @@ public final class R {
         public static final int qty=0x7f090059;
         public static final int quantityLeft=0x7f09001f;
         public static final int quantityLeftTxt=0x7f09001e;
-        public static final int received_it=0x7f090062;
+        public static final int received_it=0x7f090064;
         public static final int register_button=0x7f090024;
         public static final int registerfarmer=0x7f09003a;
         public static final int seed=0x7f09002b;
@@ -150,21 +152,22 @@ public final class R {
         public static final int activity_confirmed_order=0x7f030000;
         public static final int activity_decide_order=0x7f030001;
         public static final int activity_display_orders=0x7f030002;
-        public static final int activity_home=0x7f030003;
-        public static final int activity_select_farmers=0x7f030004;
-        public static final int display_farmers=0x7f030005;
-        public static final int farmer_details_page=0x7f030006;
-        public static final int farmer_tab_fragment=0x7f030007;
-        public static final int new_farmer_registration=0x7f030008;
-        public static final int order_tab_fragment=0x7f030009;
-        public static final int register_user=0x7f03000a;
-        public static final int shipment_details_page=0x7f03000b;
-        public static final int simple_text_view=0x7f03000c;
-        public static final int single_row=0x7f03000d;
-        public static final int single_select_farmer_row=0x7f03000e;
-        public static final int sub_order_assign_activity=0x7f03000f;
-        public static final int suborder_hidden_single_row=0x7f030010;
-        public static final int suborder_single_row=0x7f030011;
+        public static final int activity_empty=0x7f030003;
+        public static final int activity_home=0x7f030004;
+        public static final int activity_select_farmers=0x7f030005;
+        public static final int display_farmers=0x7f030006;
+        public static final int farmer_details_page=0x7f030007;
+        public static final int farmer_tab_fragment=0x7f030008;
+        public static final int new_farmer_registration=0x7f030009;
+        public static final int order_tab_fragment=0x7f03000a;
+        public static final int register_user=0x7f03000b;
+        public static final int shipment_details_page=0x7f03000c;
+        public static final int simple_text_view=0x7f03000d;
+        public static final int single_row=0x7f03000e;
+        public static final int single_select_farmer_row=0x7f03000f;
+        public static final int sub_order_assign_activity=0x7f030010;
+        public static final int suborder_hidden_single_row=0x7f030011;
+        public static final int suborder_single_row=0x7f030012;
     }
     public static final class menu {
         public static final int edit_menu_action=0x7f080000;
@@ -172,98 +175,117 @@ public final class R {
     }
     public static final class string {
         public static final int accept=0x7f050017;
-        public static final int accept_confirmation_for_edit_msg=0x7f05001b;
-        public static final int accept_confirmation_for_order_msg=0x7f05003e;
+        public static final int accept_alphabets_only=0x7f05005c;
+        public static final int accept_confirmation_for_edit_msg=0x7f05001c;
+        public static final int accept_confirmation_for_order_msg=0x7f05003f;
         /**  confirmation message for choosing yes or no  
          */
-        public static final int accept_confirmation_msg=0x7f05001a;
+        public static final int accept_confirmation_msg=0x7f05001b;
+        public static final int accept_number_only=0x7f05005d;
         /**  edit_menu_action.xml 
          */
-        public static final int action_edit=0x7f05004d;
+        public static final int action_edit=0x7f050050;
         public static final int action_settings=0x7f050002;
-        public static final int add_new_farmer=0x7f05004a;
+        public static final int add_new_farmer=0x7f05004b;
         public static final int add_new_farmers=0x7f050006;
         public static final int address=0x7f05000a;
+        public static final int all_order_downloaded=0x7f050054;
         public static final int app_name=0x7f050000;
-        public static final int available_quantities=0x7f05002a;
-        public static final int call=0x7f050047;
-        public static final int change_it=0x7f050021;
+        public static final int available_quantities=0x7f05002b;
+        public static final int call=0x7f050048;
+        public static final int cannot_be_empty=0x7f05005b;
+        public static final int change_it=0x7f050022;
         public static final int city=0x7f05000d;
-        public static final int confirm_it=0x7f050022;
-        public static final int confirmed_it=0x7f050045;
+        public static final int confirm_it=0x7f050023;
+        public static final int confirmed_it=0x7f050046;
         public static final int contact_details=0x7f050009;
-        public static final int delete=0x7f050048;
-        public static final int delivery_date=0x7f050044;
-        public static final int farmer_added_successfully=0x7f050024;
-        public static final int farmer_not_added=0x7f050025;
-        public static final int farmer_not_updated=0x7f050027;
+        public static final int delete=0x7f050049;
+        public static final int delivery_date=0x7f050045;
+        public static final int farmer_added_successfully=0x7f050025;
+        public static final int farmer_not_added=0x7f050026;
+        public static final int farmer_not_updated=0x7f050028;
         public static final int farmer_registration=0x7f050005;
-        public static final int farmer_total_price=0x7f05004b;
-        public static final int farmer_updated_successfully=0x7f050026;
-        public static final int ffruit=0x7f05002d;
-        public static final int fkernel=0x7f05002b;
+        public static final int farmer_total_price=0x7f05004c;
+        public static final int farmer_updated_successfully=0x7f050027;
+        public static final int ffruit=0x7f05002e;
+        public static final int fkernel=0x7f05002c;
         public static final int fpulp=0x7f050016;
         public static final int fruit=0x7f050014;
-        public static final int fseed=0x7f05002c;
+        public static final int fseed=0x7f05002d;
         public static final int full_name=0x7f050008;
-        public static final int go_ahead=0x7f050049;
+        public static final int go_ahead=0x7f05004a;
         public static final int hello_world=0x7f050001;
-        public static final int home_address=0x7f050032;
+        public static final int home_address=0x7f050033;
+        public static final int invalid_mobile_number=0x7f050058;
+        public static final int invalid_username=0x7f050059;
         public static final int item_and_quantity=0x7f050010;
         public static final int kernel=0x7f050011;
         public static final int kilo=0x7f050012;
         public static final int landmark=0x7f05000c;
-        public static final int last_transactions=0x7f05002e;
+        public static final int last_transactions=0x7f05002f;
         public static final int list_of_farmers=0x7f050004;
         /**  Language variables 
          */
         public static final int list_of_orders=0x7f050003;
-        public static final int mandatory_field=0x7f050020;
-        public static final int mobile=0x7f050031;
+        public static final int mandatory_field=0x7f050021;
+        public static final int mobile=0x7f050032;
         /**  Order related 
          */
-        public static final int new_order=0x7f050033;
-        public static final int no=0x7f05001f;
-        public static final int no_change=0x7f050023;
-        public static final int order_already_taken=0x7f050041;
-        public static final int order_closed=0x7f05004c;
-        public static final int order_confirmed=0x7f050040;
-        public static final int order_delivery_date=0x7f050038;
-        public static final int order_details=0x7f05003a;
-        public static final int order_id=0x7f05002f;
-        public static final int order_name=0x7f050034;
-        public static final int order_price=0x7f050036;
-        public static final int order_quantity=0x7f050035;
-        public static final int order_rejected=0x7f050042;
-        public static final int order_total=0x7f050039;
-        public static final int order_type=0x7f050037;
-        public static final int payment=0x7f050030;
+        public static final int new_order=0x7f050034;
+        public static final int no=0x7f050020;
+        public static final int no_change=0x7f050024;
+        public static final int not_valid_name=0x7f050056;
+        public static final int numbers_only=0x7f050057;
+        public static final int order_already_taken=0x7f050042;
+        public static final int order_available_take_it_fast=0x7f05004f;
+        public static final int order_closed=0x7f05004d;
+        public static final int order_confirmed=0x7f050041;
+        public static final int order_delivery_date=0x7f050039;
+        public static final int order_details=0x7f05003b;
+        public static final int order_id=0x7f050030;
+        public static final int order_is_closed=0x7f050060;
+        public static final int order_name=0x7f050035;
+        public static final int order_price=0x7f050037;
+        public static final int order_quantity=0x7f050036;
+        public static final int order_rejected=0x7f050043;
+        public static final int order_total=0x7f05003a;
+        public static final int order_type=0x7f050038;
+        public static final int password_mismatch=0x7f05005a;
+        public static final int payment=0x7f050031;
         /**  Inside new_farmer_registration.xml 
          */
         public static final int personal_details=0x7f050007;
         public static final int pincode=0x7f05000f;
+        public static final int please_wait=0x7f05004e;
         public static final int pulp=0x7f050015;
         /**  ///////////string of farmer_details_page.xml and FarmerDetailsPage.java //////////////
          */
-        public static final int quantity_left=0x7f050028;
-        public static final int received_it=0x7f050046;
+        public static final int quantity_left=0x7f050029;
+        public static final int received_it=0x7f050047;
         public static final int reject=0x7f050018;
-        public static final int reject_confirmation_for_edit_msg=0x7f05001d;
-        public static final int reject_confirmation_for_order_msg=0x7f05003f;
-        public static final int reject_confirmation_msg=0x7f05001c;
+        public static final int reject_confirmation_for_edit_msg=0x7f05001e;
+        public static final int reject_confirmation_for_order_msg=0x7f050040;
+        public static final int reject_confirmation_msg=0x7f05001d;
+        public static final int required=0x7f050055;
+        public static final int rupee=0x7f05001a;
         public static final int rupee_per_kg=0x7f050019;
         public static final int seed=0x7f050013;
-        public static final int select_farmer=0x7f050043;
-        public static final int selected_quantity=0x7f050029;
-        public static final int shipmentDetails=0x7f05004e;
-        public static final int shipment_approximate_delvery_date=0x7f050050;
-        public static final int shipment_sent_date=0x7f05004f;
+        public static final int select_farmer=0x7f050044;
+        public static final int select_reaching_date=0x7f05005f;
+        public static final int select_sent_date=0x7f05005e;
+        public static final int selected_quantity=0x7f05002a;
+        public static final int shipmentDetails=0x7f050051;
+        public static final int shipment_approximate_delvery_date=0x7f050053;
+        public static final int shipment_sent_date=0x7f050052;
         public static final int state=0x7f05000e;
         public static final int street_name=0x7f05000b;
-        public static final int suborderprice=0x7f05003c;
-        public static final int suborderqty=0x7f05003b;
-        public static final int subordertravel=0x7f05003d;
-        public static final int yes=0x7f05001e;
+        public static final int sub_order_confirmed=0x7f050062;
+        public static final int sub_order_not_completed=0x7f050061;
+        public static final int sub_order_received=0x7f050063;
+        public static final int suborderprice=0x7f05003d;
+        public static final int suborderqty=0x7f05003c;
+        public static final int subordertravel=0x7f05003e;
+        public static final int yes=0x7f05001f;
     }
     public static final class style {
         /** 

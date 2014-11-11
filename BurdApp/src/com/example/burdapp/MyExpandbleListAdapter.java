@@ -16,6 +16,7 @@ import java.util.Calendar;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -42,6 +43,7 @@ public class MyExpandbleListAdapter extends BaseExpandableListAdapter {
 	final Activity activity;
 	Database db;
 	TextView order_left, order_selected;
+	
 	Button btnNext;
 	ArrayList<String> list_fids,list_fnames,list_quantity,list_occupied_quantity,list_forder_delivery,list_forder_delivery_view,list_forder_qty,list_forder_price,
 						list_forder_travel_cost,list_forder_ids,list_forder_status,list_forder_received,list_assigned_qty,list_farmers_qty,list_forder_confirmed;
@@ -77,17 +79,12 @@ public class MyExpandbleListAdapter extends BaseExpandableListAdapter {
 		this.btnNext = btnNext;
 		db = new Database(this.context);
 		
+		
 		this.activity = (Activity) c;
 		updateButtonState();
+		updateQuantityInParent();
 	}
-	public void updateQuantityInParent(){
-		/*int total = 0;
-		for(int i=0; i<list_forder_qty.size();i++){
-			
-			total += Integer.valueOf(list_forder_qty.get(i)); 
-		}
-		order_selected.setText(Integer.toString(total));*/
-	}
+	
 	@Override
 	public Object getChild(int arg0, int arg1) {
 		// TODO Auto-generated method stub
@@ -215,7 +212,29 @@ public class MyExpandbleListAdapter extends BaseExpandableListAdapter {
 		}			
 		
 	}
-	
+	public void updateQuantityInParent(){
+		int order_int_qty = Integer.valueOf(order_qty);
+		int selected_qty=0,left_qty=0;
+		for(int i=0; i<list_forder_qty.size();i++){
+			selected_qty += Integer.valueOf(list_forder_qty.get(i));
+			left_qty =order_int_qty - Integer.valueOf(list_forder_qty.get(i));
+			order_int_qty -= Integer.valueOf(list_forder_qty.get(i));
+		}
+		if(selected_qty==Integer.valueOf(order_qty)){
+			order_selected.setTextColor(Color.BLACK);
+			order_selected.setText(""+selected_qty+activity.getString(R.string.kilo));			
+		}else{
+			order_selected.setTextColor(Color.parseColor("#CC3333"));
+			order_selected.setText(""+selected_qty+activity.getString(R.string.kilo));
+		}
+		if(left_qty>0){
+			order_left.setTextColor(Color.parseColor("#CC3333"));
+			order_left.setText(""+left_qty+activity.getString(R.string.kilo));
+		}else{
+			order_left.setTextColor(Color.BLACK);			
+			order_left.setText("000"+activity.getString(R.string.kilo));
+		}
+	}
 	public void updateButtonState(){
 		int incr = 0;
 		for(int j=0;j<list_forder_received.size();j++){
@@ -228,6 +247,22 @@ public class MyExpandbleListAdapter extends BaseExpandableListAdapter {
 		}else{
 			btnNext.setEnabled(false);
 		}
+			
+	}
+	
+	public void setSubOrderStatusText(MyParentViewHolder v, int pos){
+		String statusText = "";
+    	if(list_forder_status.get(pos)==null || list_forder_status.get(pos).equals("0") || list_forder_status.get(pos).equals("")|| list_forder_status.get(pos).length()==0){
+    		v.txtStatus.setTextColor(Color.RED);
+    		statusText = activity.getString(R.string.sub_order_not_completed);
+    	}else if(list_forder_status.get(pos).equals("1")){
+    		v.txtStatus.setTextColor(Color.BLUE);
+    		statusText = activity.getString(R.string.sub_order_confirmed);
+    	}else if(list_forder_status.get(pos).equals("2")){
+    		v.txtStatus.setTextColor(Color.YELLOW);
+    		statusText = activity.getString(R.string.sub_order_received);
+    	}
+    	v.txtStatus.setText(statusText);
 	}
 	@Override
 	public View getChildView(final int arg0, int arg1, boolean arg2, View convertView,
@@ -238,6 +273,7 @@ public class MyExpandbleListAdapter extends BaseExpandableListAdapter {
     		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     		row = inflater.inflate(R.layout.suborder_hidden_single_row,parent,false);
     		final MyViewHolder holder = new MyViewHolder(row);
+    		final MyParentViewHolder parentHolder = new MyParentViewHolder(parent);
     		row.setTag(holder);
     	//int f_tot_price = Integer.valueOf(list_forder_qty.get(arg0)) * Integer.valueOf(list_forder_price.get(arg0));
     	holder.ed_qty.setText(list_forder_qty.get(arg0));
@@ -252,9 +288,7 @@ public class MyExpandbleListAdapter extends BaseExpandableListAdapter {
     	checkAllTextBoxes(holder.btnCalendar,holder.ed_qty,holder.ed_price,holder.ed_travel,
     						holder.txtDelDate,holder.cnf_it,holder.received_it,list_forder_confirmed.get(arg0),list_forder_received.get(arg0));
     	updateFarmerTotPrice(holder.txtFarmerTotPrice,holder.ed_price.getText(),holder.ed_qty.getText(),holder.ed_travel.getText());
-    	
-    	
-    	
+    	    	
     	
     	holder.cnf_it.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			
@@ -281,13 +315,19 @@ public class MyExpandbleListAdapter extends BaseExpandableListAdapter {
 				SimpleDateFormat sdf = new SimpleDateFormat("dd:MM:yyyy HH:mm:ss a");
 				String strDate = sdf.format(cur.getTime());
 				if(isChecked){
+					String statusCnf = "1";
+					list_forder_status.set(arg0, statusCnf);
 					list_forder_confirmed.set(arg0,strDate);
-					db.updateFarmerOrderConfirmed(list_forder_ids.get(arg0),strDate);
+					db.updateFarmerOrderConfirmed(list_forder_ids.get(arg0),strDate,"1");
 					//holder.btnCalendar.
 				}else{
+					String statusCnf = "0";
+					list_forder_status.set(arg0, statusCnf);
 					list_forder_confirmed.set(arg0,null);
-					db.updateFarmerOrderReceived(list_forder_ids.get(arg0),null);
+					db.updateFarmerOrderConfirmed(list_forder_ids.get(arg0),null,"0");
+					db.updateFarmerOrderReceived(list_forder_ids.get(arg0),null,"0");
 				}
+				setSubOrderStatusText(parentHolder, arg0);
 			}
 		});
     	
@@ -310,15 +350,20 @@ public class MyExpandbleListAdapter extends BaseExpandableListAdapter {
 				SimpleDateFormat sdf = new SimpleDateFormat("dd:MM:yyyy HH:mm:ss a");
 				String strDate = sdf.format(cur.getTime());
 				if(isChecked){
+					String statusRec = "2";
+					list_forder_status.set(arg0, statusRec);
 					list_forder_received.set(arg0,strDate);
-					db.updateFarmerOrderReceived(list_forder_ids.get(arg0),strDate);
+					db.updateFarmerOrderReceived(list_forder_ids.get(arg0),strDate,"2");
 					//holder.btnCalendar.
 				}else{
+					String statusRec = "1";
+					list_forder_status.set(arg0, statusRec);
 					list_forder_received.set(arg0,null);
-					db.updateFarmerOrderReceived(list_forder_ids.get(arg0),null);
+					db.updateFarmerOrderReceived(list_forder_ids.get(arg0),null,"1");
 				}
 				
 				updateButtonState();
+				setSubOrderStatusText(parentHolder, arg0);
 			}
 		});
     	
@@ -369,6 +414,8 @@ public class MyExpandbleListAdapter extends BaseExpandableListAdapter {
 						holder.cnf_it,holder.received_it,list_forder_confirmed.get(arg0),list_forder_received.get(arg0));
 				updateFarmerTotPrice(holder.txtFarmerTotPrice,holder.ed_price.getText(),holder.ed_qty.getText(),holder.ed_travel.getText());
 				//System.out.print("FOcus changed"+list_forder_ids.set(arg0, this.toString()));
+				
+				updateQuantityInParent();
 			}
 			
 			@Override
@@ -489,22 +536,8 @@ public class MyExpandbleListAdapter extends BaseExpandableListAdapter {
     		im = (ImageView) v.findViewById(R.id.imageView1);
     		cb = (CheckBox) v.findViewById(R.id.checkBox1);*/
 		}
-    }
+    }	
 	
-	class MyParentGroupViewHolder{
-    	TextView txtName, txtQuantity, txtStatus;
-    	ImageView im;
-    	CheckBox cb;
-    	public MyParentGroupViewHolder(ViewGroup v) {
-			// TODO Auto-generated constructor stub
-    		txtName = (TextView) v.findViewById(R.id.textView1);
-    		txtQuantity = (TextView) v.findViewById(R.id.textView2);
-    		txtStatus = (TextView) v.findViewById(R.id.textView3);
-    		/*txtQuantity = (TextView) v.findViewById(R.id.farmerQuantity);
-    		im = (ImageView) v.findViewById(R.id.imageView1);
-    		cb = (CheckBox) v.findViewById(R.id.checkBox1);*/
-		}
-    }
 	@Override
 	public View getGroupView(int arg0, boolean arg1, View convertView, ViewGroup parent) {
 		// TODO Auto-generated method stub
@@ -518,7 +551,7 @@ public class MyExpandbleListAdapter extends BaseExpandableListAdapter {
     		row.setTag(holder);
     		
     		//MyParentGroupViewHolder pgV = new MyParentGroupViewHolder(parent);
-    		holder.txtStatus.setText(Integer.toString(parent.getChildCount()));
+    		//holder.txtStatus.setText(Integer.toString(parent.getChildCount()));
     		//TextView tv = (TextView) parent.getChildAt(R.id.selectedQuantity);
     		//tv.setText("hallo");
     		
@@ -528,9 +561,12 @@ public class MyExpandbleListAdapter extends BaseExpandableListAdapter {
     	//}
     	holder.txtName.setText(list_fnames.get(arg0));
     	   	int totalqty = Integer.valueOf(list_forder_qty.get(arg0)) + Integer.valueOf(list_quantity.get(arg0));
-    	String stmtqty = list_forder_qty.get(arg0)+"kg / "+totalqty+"kg";
+    	String stmtqty = list_forder_qty.get(arg0)+activity.getString(R.string.kilo)+"/"+totalqty+activity.getString(R.string.kilo);
     	holder.txtQuantity.setText(stmtqty);
-    	holder.txtStatus.setText(list_forder_status.get(arg0));
+    	//Toast.makeText(activity, list_forder_status.get(arg0).toString()+": status", Toast.LENGTH_LONG).show();
+    	setSubOrderStatusText(holder, arg0);
+    	
+    	
 		return row;
 	}
 

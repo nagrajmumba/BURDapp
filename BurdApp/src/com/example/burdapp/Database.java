@@ -43,6 +43,10 @@ public class Database {
 			e.printStackTrace();		
 		}
 	}
+	public void closeDb(){
+		this.db.close();
+	}
+	
 	
 	
 	
@@ -1168,11 +1172,12 @@ public class Database {
 			}
 	}
 	
-	public void updateFarmerOrderReceived(String forder_id, String received_date)
+	public void updateFarmerOrderReceived(String forder_id, String received_date, String status)
 	{
 		ContentValues value = new ContentValues();	
 		//if(!received_date.equals(""))
 			value.put(applicationConstants.FORDER_RECEIVED, received_date);
+			value.put(applicationConstants.FORDER_STATUS, status);
 		//else
 			//value.put(applicationConstants.FORDER_RECEIVED, "");
 		
@@ -1191,11 +1196,12 @@ public class Database {
 				e.printStackTrace();
 			}
 	}
-	public void updateFarmerOrderConfirmed(String forder_id, String confirmed_date)
+	public void updateFarmerOrderConfirmed(String forder_id, String confirmed_date, String status)
 	{
 		ContentValues value = new ContentValues();	
 		//if(!received_date.equals(""))
 			value.put(applicationConstants.FORDER_CONFIRMED, confirmed_date);
+			value.put(applicationConstants.FORDER_STATUS, status);
 		//else
 			//value.put(applicationConstants.FORDER_RECEIVED, "");
 		

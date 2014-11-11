@@ -243,7 +243,19 @@ public class FarmerRegistration extends Activity implements OnClickListener {
 			 String F_FRUIT = f_fruit.getText().toString();
 			 String F_KERNEL = f_kernel.getText().toString();
 			 String F_PULP = f_pulp.getText().toString();
-		 
+			 if(F_SEED.equals("") || F_SEED.equals("null") || F_SEED.equals("00")){
+				 F_SEED = "0";
+			 }
+			 if(F_FRUIT.equals("") || F_FRUIT.equals("null") || F_FRUIT.equals("00")){
+				 F_FRUIT = "0";
+			 }
+			 if(F_KERNEL.equals("") || F_KERNEL.equals("null") || F_KERNEL.equals("00")){
+				 F_KERNEL = "0";
+			 }
+			 if(F_PULP.equals("") || F_PULP.equals("null") || F_PULP.equals("00")){
+				 F_PULP = "0";
+			 }
+			 
 		long id = db.insertFarmer(F_NAME,F_MOB,F_SEED,F_FRUIT,F_KERNEL,F_PULP,F_STREET,F_LANDMARK,F_CITY,F_STATE,F_PINCODE,F_ADDRESS);
 		if(id>0){
 			//----------do server synching 
@@ -269,6 +281,18 @@ public class FarmerRegistration extends Activity implements OnClickListener {
 			 String F_FRUIT = f_fruit.getText().toString();
 			 String F_KERNEL = f_kernel.getText().toString();
 			 String F_PULP = f_pulp.getText().toString();
+			 if(F_SEED.equals("") || F_SEED.equals("null") || F_SEED.equals("00")){
+				 F_SEED = "0";
+			 }
+			 if(F_FRUIT.equals("") || F_FRUIT.equals("null") || F_FRUIT.equals("00")){
+				 F_FRUIT = "0";
+			 }
+			 if(F_KERNEL.equals("") || F_KERNEL.equals("null") || F_KERNEL.equals("00")){
+				 F_KERNEL = "0";
+			 }
+			 if(F_PULP.equals("") || F_PULP.equals("null") || F_PULP.equals("00")){
+				 F_PULP = "0";
+			 }
 		long id = db.updateFarmer(F_NAME,F_MOB,F_SEED,F_FRUIT,F_KERNEL,F_PULP,F_STREET,F_LANDMARK,F_CITY,F_STATE,F_PINCODE,F_ADDRESS,f_id);
 		if(id>0){
 			//----------do server synching 

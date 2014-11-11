@@ -1,6 +1,9 @@
 package com.example.burdapp;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 
 import org.json.JSONArray;
@@ -75,11 +78,53 @@ public class NewOrderDetails extends Activity implements OnClickListener{
 		orderType.setText(strTyp);
 		orderQuantity.setText((CharSequence) o_Details.get(3)+" "+getString(R.string.kilo));
 		orderPrice.setText((CharSequence) o_Details.get(4)+" "+getString(R.string.rupee_per_kg));
-		orderDelivery.setText((CharSequence) o_Details.get(7));
+		if(total==null || total.equals("0")){
+			total="000";
+		}
 		availableQuantity.setText(total+" "+getString(R.string.kilo));
 		
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyy");
+		Date strDate=null;
+		
+			try {
+				strDate = sdf.parse(o_Details.get(7).toString());
+				//System.out.print(strDate+": date");
+			} catch (java.text.ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+    	Calendar cal = Calendar.getInstance();
+    	cal.setTime(strDate);
+    	//cal.add(Calendar.DATE, -3);
+    	Date new_date = cal.getTime();
+    	String stringDay = (String) android.text.format.DateFormat.format("dd", new_date);
+    	String stringMonth = (String) android.text.format.DateFormat.format("MM", new_date);
+    	String stringYear = (String) android.text.format.DateFormat.format("yyyy", new_date);
+    	
+    	int mmonth = Integer.valueOf(stringMonth);
+    	String m="";
+    	String[] monthArray = getResources().getStringArray(R.array.month_array);
+    	switch(mmonth){
+		case 1: m=monthArray[0];break;
+		 case 2: m=monthArray[1];break;
+		 case 3: m=monthArray[2];break; 
+		 case 4: m=monthArray[3];break;
+		 case 5: m=monthArray[4];break;
+		 case 6: m=monthArray[5];break;
+		 case 7: m=monthArray[6];break;
+		 case 8: m=monthArray[7];break; 
+		 case 9: m=monthArray[8];break;
+		 case 10: m=monthArray[9];break;
+		 case 11: m=monthArray[10];break;
+		 case 12: m=monthArray[11];break;
+		}
+    	
+    	String sub_order_date = stringDay+" "+m+" "+stringYear;
+    	orderDelivery.setText(sub_order_date);
+		
 		prgDialog = new ProgressDialog(this);
- 	    prgDialog.setMessage("Please wait...");
+ 	    prgDialog.setMessage(getString(R.string.please_wait));
 		prgDialog.setCancelable(false);
 		
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -122,11 +167,11 @@ public class NewOrderDetails extends Activity implements OnClickListener{
 	                //your deleting code
 	                dialog.dismiss();  
 	                if(flag == 1){
-	                	Toast.makeText(getApplicationContext(), "swiikar- yes the order", Toast.LENGTH_SHORT).show();
+	                	//Toast.makeText(getApplicationContext(), "swiikar- yes the order", Toast.LENGTH_SHORT).show();
 	                	confirmOrderOnServer();
 	                	//accept order and upsync
 	                }else if(flag==0){
-	                	Toast.makeText(getApplicationContext(), "radh -  yes the order", Toast.LENGTH_SHORT).show();
+	                	//Toast.makeText(getApplicationContext(), "radh -  yes the order", Toast.LENGTH_SHORT).show();
 	                	//reject order and upsync
 	                }
 	            }			  

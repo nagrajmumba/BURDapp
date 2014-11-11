@@ -71,7 +71,7 @@ public class Mediator extends Activity{
     	
     	
     	prgDialog = new ProgressDialog(this);
-		prgDialog.setMessage("Synching SQLite Data with Remote MySQL DB. Please wait...");
+		prgDialog.setMessage("Synching "+getString(R.string.please_wait));
 		prgDialog.setCancelable(false);
 		try{
 			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
@@ -134,34 +134,34 @@ public class Mediator extends Activity{
 			     			String M_CONFIRMPASS = m_Confirmpass.getText().toString();
 			     						     			
 			     			if (M_NAME.length() == 0 || M_NAME.isEmpty()) {		
-			     				m_Name.setError("Mandatory field");
+			     				m_Name.setError(getString(R.string.required));
 			     				isEmpty = true;
 			     			}if (!M_NAME.matches("[a-zA-Z ]+")) {
-			     				m_Name.setError("Not a valid name");
+			     				m_Name.setError(getString(R.string.not_valid_name));
 			     				isEmpty = true;			     				
 			     			}if (M_MOBILE.length() == 0 || M_MOBILE.isEmpty()) {
-			     				m_Mobile.setError("Mandatory field");
+			     				m_Mobile.setError(getString(R.string.required));
 			     				isEmpty = true;			     				
 			     			}if (!M_MOBILE.matches("[0-9]+")) {
-			     				m_Mobile.setError("Numbers Only");
+			     				m_Mobile.setError(getString(R.string.numbers_only));
 			     				isEmpty = true;			     				
 			     			}if (M_MOBILE.length()!=10) {
-			     				m_Mobile.setError("invalid mobile number");
+			     				m_Mobile.setError(getString(R.string.invalid_mobile_number));
 			     				isEmpty = true;			     				
 			     			}if (M_USERNAME.length() == 0 || M_USERNAME.isEmpty()) {
-			     				m_Username.setError("Mandatory field");
+			     				m_Username.setError(getString(R.string.required));
 			     				isEmpty = true;			     				
 			     			}if (!M_USERNAME.matches("[a-zA-Z0-9]+")) {
-			     				m_Username.setError("Invalid Username");
+			     				m_Username.setError(getString(R.string.invalid_username));
 			     				isEmpty = true;			     				
 			     			}if (M_PASSWORD.length() == 0 || M_PASSWORD.isEmpty()) {
-			     				m_Password.setError("Mandatory field");
+			     				m_Password.setError(getString(R.string.required));
 			     				isEmpty = true;
 			     			}if (M_CONFIRMPASS.length() == 0 || M_CONFIRMPASS.isEmpty()) {
-			     				m_Confirmpass.setError("Mandatory field");
+			     				m_Confirmpass.setError(getString(R.string.required));
 			     				isEmpty = true;
 			     			}if (!M_CONFIRMPASS.equals(M_PASSWORD)) {
-			     				m_Confirmpass.setError("Password Mismatch");
+			     				m_Confirmpass.setError(getString(R.string.password_mismatch));
 			     				isEmpty = true;
 			     			}			     			
 			     			if(isEmpty ==true){
@@ -206,10 +206,10 @@ public class Mediator extends Activity{
     public Void Is_Valid_Person_Name(EditText edt) throws NumberFormatException {
 		String valid_name;
 		if (edt.getText().toString().length() <= 0) {
-			edt.setError("Name cannot be empty.");
+			edt.setError(getString(R.string.cannot_be_empty));
 			valid_name = null;
 		} else if (!edt.getText().toString().matches("[a-zA-Z ]+")) {
-			edt.setError("Accept Alphabets Only.");
+			edt.setError(getString(R.string.accept_alphabets_only));
 			valid_name = null;
 		} else {
 			edt.setError(null);
@@ -221,10 +221,10 @@ public class Mediator extends Activity{
     public Void Is_Valid_Username(EditText edt) throws NumberFormatException {
 		String valid_name;
 		if (edt.getText().toString().length() <= 0) {
-			edt.setError("Username cannot be empty");
+			edt.setError(getString(R.string.cannot_be_empty));
 			valid_name = null;
 		} else if (!edt.getText().toString().matches("[a-zA-Z0-9]+")) {
-			edt.setError("Accept Alphabets Only.");
+			edt.setError(getString(R.string.accept_alphabets_only));
 			valid_name = null;
 		} else if (edt.getText().toString().length() > 8){
 			edt.setError("Username cannont be greater than 8 characters");
@@ -239,13 +239,13 @@ public class Mediator extends Activity{
     public Void Is_Valid_Mobile(EditText edt) throws NumberFormatException {
 		String valid_name;
 		if (edt.getText().toString().length() <= 0) {
-			edt.setError("Mobile number cannot be empty.");
+			edt.setError(getString(R.string.cannot_be_empty));
 			valid_name = null;
 		} else if (edt.getText().toString().length() > 10) {
-			edt.setError("Invalid Mobile Number");
+			edt.setError(getString(R.string.invalid_mobile_number));
 			valid_name = null;
 		} else if (!edt.getText().toString().matches("[0-9]+")) {
-			edt.setError("Accepts number only.");
+			edt.setError(getString(R.string.accept_number_only));
 			valid_name = null;
 		}else {
 			edt.setError(null);

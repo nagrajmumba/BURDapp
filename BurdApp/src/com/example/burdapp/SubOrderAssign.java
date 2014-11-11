@@ -112,7 +112,16 @@ public class SubOrderAssign extends Activity {
 		txtleftqty = (TextView) findViewById(R.id.quantityLeft);
 		txtselectedqty = (TextView) findViewById(R.id.selectedQuantity);
 		txtorderqty = (TextView) findViewById(R.id.orderQuantity);
-		txtorderqty.setText(order_qty);
+		txtorderqty.setText(order_qty+getString(R.string.kilo));
+		
+		int order_int_qty = Integer.valueOf(order_qty);
+		int selected_qty = 0, left_qty=0;
+		for(int i=0; i<list_forder_qty.size();i++){
+			selected_qty += Integer.valueOf(list_forder_qty.get(i));
+			left_qty =order_int_qty - Integer.valueOf(list_forder_qty.get(i));
+		}
+		txtselectedqty.setText(""+selected_qty);
+		txtleftqty.setText(""+left_qty);
 		btnNext = (Button) findViewById(R.id.btnNext);
 		String temp = (String) txtordername.getText();
 		txtordername.setText(temp+" : "+order_name);

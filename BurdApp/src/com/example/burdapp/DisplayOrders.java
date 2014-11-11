@@ -49,9 +49,11 @@ public class DisplayOrders extends Activity {
 	   
 	    db = new Database(this);
 	    prgDialog = new ProgressDialog(this);
+	    prgDialog.setMessage(getString(R.string.please_wait));
+	    prgDialog.setCancelable(false);
 	    flag=0;
 	    ArrayList<ArrayList<Object>> array_list = null;	    
-	    db.updateFarmerOrderSynched();
+	    //db.updateFarmerOrderSynched();
 	    	array_list = db.getAllOrdersAsArrays();
 	    	System.out.println("array list:" + array_list);
 	    	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -91,7 +93,7 @@ public class DisplayOrders extends Activity {
 			final String id1 = list_ids.get(position);
 			final String status = list_status.get(position);
 			System.out.println("this is status "+status);
-			Toast.makeText(getApplicationContext(), id1, Toast.LENGTH_SHORT).show();
+			//Toast.makeText(getApplicationContext(), id1, Toast.LENGTH_SHORT).show();
 			Bundle b = new Bundle();
    	    	b.putString(applicationConstants.ORDER_ID,list_ids.get(position));
    	    	Intent in = null;
@@ -145,7 +147,7 @@ public void confirmOrderOnServer(final String order_id){
 								//System.out.println("HI--"+obj.get("status"));
 								if(obj.get("current_status").equals("yes")){
 									//add status locally....
-									Toast.makeText(getApplicationContext(), "order available take it fast", Toast.LENGTH_LONG).show();
+									Toast.makeText(getApplicationContext(), getString(R.string.order_available_take_it_fast), Toast.LENGTH_LONG).show();
 									Bundle b = new Bundle();
 						   	    	b.putString(applicationConstants.ORDER_ID,order_id);
 						   	    	Intent in = new Intent(getApplicationContext(), NewOrderDetails.class);			     	   	    
@@ -219,8 +221,7 @@ public void confirmOrderOnServer(final String order_id){
 		//Use GSON to serialize Array List to JSON
 		return gson.toJson(wordList);
 	}
-	
-	
+	 	
 	  private class StableArrayAdapter extends ArrayAdapter<String> {
 
 	    //HashMap<String, Integer> mIdMap = new HashMap<String, Integer>();

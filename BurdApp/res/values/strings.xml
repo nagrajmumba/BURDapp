@@ -26,11 +26,12 @@
 	<string name="kilo">किलो</string>
 	<string name="seed">चुल्लू बीज</string>
 	<string name="fruit">चुल्लू फल</string>
-	<string name="pulp">चुल्लू pulp</string>
-	<string name="fpulp">pulp</string>
+	<string name="pulp">चुल्लू पल्प</string>
+	<string name="fpulp">पल्प</string>
 	<string name="accept">स्वीकार</string>
 	<string name="reject">रद</string>
-	<string name="rupee_per_kg">Rs/kg</string>
+	<string name="rupee_per_kg">₹/कि.</string>
+	<string name="rupee">₹</string>
 	<!-- confirmation message for choosing yes or no  -->
 	<string name="accept_confirmation_msg">क्या आप किसान को जोड़ना चाहते है ?</string>
 	<string name="accept_confirmation_for_edit_msg">क्या आप अपनी जानकारी बदलना चाहते है ?</string>
@@ -53,8 +54,8 @@
     </string-array>
     
 	<!-- ///////////string of farmer_details_page.xml and FarmerDetailsPage.java //////////////-->
-	<string name="quantity_left">shesh मात्रा</string>
-	<string name="selected_quantity">chuni hui मात्रा</string>
+	<string name="quantity_left">शेष मात्रा</string>
+	<string name="selected_quantity">चुनी हुई मात्रा</string>
 	<string name="available_quantities">उपलब्ध मात्रा</string>
 	<string name="fkernel">गिरी</string>
 	<string name="fseed">बीज</string>
@@ -67,38 +68,57 @@
 	
 	
 	<!-- Order related -->
-	<string name="new_order">Naya order</string>
-	<string name="order_name">Order</string>
-	<string name="order_quantity">आर्डर मात्रा</string>
-	<string name="order_price">dar/rate</string>
-	<string name="order_type">Chullu</string>
-	<string name="order_delivery_date">Pahunch ki tarik</string>
-	<string name="order_total">Kul Rashi</string>
-	<string name="order_details">order vivran</string>
+	<string name="new_order">नया ऑर्डर</string>
+	<string name="order_name">ऑर्डर</string>
+	<string name="order_quantity">ऑर्डर मात्रा</string>
+	<string name="order_price">दर/रेट</string>
+	<string name="order_type">चुल्लू</string>
+	<string name="order_delivery_date">पहुँच की तरीक</string>
+	<string name="order_total">कुल ऑर्डर राशि</string>
+	<string name="order_details">ऑर्डर विवरण</string>
 	
 	<string name="suborderqty">मात्रा</string>
 	<string name="suborderprice">दर</string>
-	<string name="subordertravel">dohne ka bhada</string>
-	<string name="accept_confirmation_for_order_msg">Kya aap is order ko swiikar karna chahte hain?</string>
-	<string name="reject_confirmation_for_order_msg">Kya aap is order ko radh karna chahte hain?</string>
-	<string name="order_confirmed">Aapka order confirm ho chuka hai</string>
-	<string name="order_already_taken">Maaf kigiyega!! Order kisi aur ko mil gayi hai!!</string>
-	<string name="order_rejected">Aapka order radh ho chuka hai</string>
-	<string name="select_farmer">kisan chunein</string>
-	<string name="delivery_date">Pahunch ki tarik</string>
-	<string name="confirmed_it">Pakka karein</string>
-	<string name="received_it">Prapth Hua</string>
-	<string name="call">kaul karein</string>
-	<string name="delete">Nirast Karein</string>
-	<string name="go_ahead">aage badein</string>
-	<string name="add_new_farmer">naya kisan jodein</string>
-	<string name="farmer_total_price">Kul rashi</string>
-	<string name="order_closed">order samapt</string>
+	<string name="subordertravel">ढ़ोने का भाड़ा</string>
+	<string name="accept_confirmation_for_order_msg">क्या आप इस ऑर्डर को स्वीकार करना चाहते हो?</string>
+	<string name="reject_confirmation_for_order_msg">क्या आप इस ऑर्डर को रद्द करना चाहते हो?</string>
+	<string name="order_confirmed">आपका ऑर्डर पक्का हो चूका है !!</string>
+	<string name="order_already_taken">माफ़ कीजिये!  ऑर्डर किसी और को मिल चुका है !!</string>
+	<string name="order_rejected">आपका ऑर्डर रद्द हो चूका है !!</string>
+	<string name="select_farmer">किसान चुनें</string>
+	<string name="delivery_date">पहुँच की तरीक</string>
+	<string name="confirmed_it">पक्का करें</string>
+	<string name="received_it">प्राप्त हुआ</string>
+	<string name="call">कॉल करें</string>
+	<string name="delete">निरस्त करें</string>
+	<string name="go_ahead">आगे बढ़ें</string>
+	<string name="add_new_farmer">नया किसान जोड़ें</string>
+	<string name="farmer_total_price">कुल राशि</string>
+	<string name="order_closed">ऑर्डर समाप्त</string>
+	<string name="please_wait">कृपया इंतज़ार करें ...</string>
+	<string name="order_available_take_it_fast">ऑर्डर उपलब्द है! जल्दी स्वीकार कर ली जिए !!ं</string>
 	<!-- edit_menu_action.xml -->
-	<string name="action_edit">order kramank</string>
-	<string name="shipmentDetails">Order bhejne ke vivran</string>
-	<string name="shipment_sent_date">Order bhejne ki tareek</string>
-	<string name="shipment_approximate_delvery_date">Order pahunch ki tareek</string>
+	<string name="action_edit">ऑर्डर क्रमांक</string>
+	<string name="shipmentDetails">ऑर्डर भेजने के विवरण</string>
+	<string name="shipment_sent_date">ऑर्डर भेजने की तरीक</string>
+	<string name="shipment_approximate_delvery_date">ऑर्डर पहुँच की तरीक</string>
+	<string name="all_order_downloaded">सभी ऑर्डर डाउनलोड हो चुके हैं !!</string>
+	<string name="required">ज़रूरी है</string>
+	<string name="not_valid_name">सही नाम लिखिए</string>
+	<string name="numbers_only">सिर्फ नंबर टाइप कीजिये!</string>
+	<string name="invalid_mobile_number">मोबाइल नंबर सही नहीं है!</string>
+	<string name="invalid_username">username सही नहीं है!</string>
+	<string name="password_mismatch">पासवर्ड एक जैसे नहीं हैं!</string>
+	<string name="cannot_be_empty">कुछ टाइप कीजिये!</string>
+	<string name="accept_alphabets_only">Alphabets Only</string>
+	<string name="accept_number_only">Numbers Only</string> 
+	<string name="select_sent_date">भेजने की तरीक चुनें !</string>
+	<string name="select_reaching_date">पहुँच की तरीक चुनें !</string>
+	<string name="order_is_closed">ऑर्डर समाप्त हो चुका है !</string>
+	<string name="sub_order_not_completed">पक्का नहीं हुआ है !</string>
+	<string name="sub_order_confirmed">पक्का हो गया है !</string>
+	<string name="sub_order_received">प्राप्त हो चुका है !</string>
+	
 	<!-- HomeActivity.java -->	
     <string-array name="month_array">
           <item>जनवरी </item>

@@ -29,13 +29,14 @@ public class TimeAlarm extends BroadcastReceiver {
 	
 	 NotificationManager nm;
 	 Context c;
+	// Database db;
 	@SuppressWarnings("deprecation")
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		// TODO Auto-generated method stub
 		//Burd b;
 		c = context;
-		final Database db = new Database(context);	
+		//db = new Database(context);	
 		
 		
 		//Create AsycHttpClient object
@@ -51,19 +52,25 @@ public class TimeAlarm extends BroadcastReceiver {
 								try {
 									JSONArray arr = new JSONArray(response);
 									System.out.println(arr.length());
-									/*for(int i=0; i<arr.length()-1;i++){
+									System.out.println(arr);
+									
+									ArrayList<String> id_list = new ArrayList<String>();
+									for(int i=0; i<arr.length()-1;i++){
 										JSONObject obj = (JSONObject)arr.get(i);
 										//int b=i+1;
-										//System.out.println(b+"-"+obj);
-										//System.out.println(obj.get("status"));
-										//db.addAndUpdateOrders(obj);
 										
-									}*/
+										if(!obj.get("id").equals(null)){
+											//db.addAndUpdateOrders(obj);
+											id_list.add((String) obj.get("id"));
+										}
+									}
+									//db.removeUnwantedOrders(id_list);
+									//db.closeDb();
 									if(arr.length()>0){
 										nm = (NotificationManager) c.getSystemService(Context.NOTIFICATION_SERVICE);
 										  CharSequence from = " BURD App";
 										  CharSequence message = arr.length()+" New Orders!!";
-										  PendingIntent contentIntent = PendingIntent.getActivity(c, 0,new Intent(c, HomeActivity.class), 0);
+										  PendingIntent contentIntent = PendingIntent.getActivity(c, 0,new Intent(c, NotificationAddOrders.class), 0);
 										 
 						                                             
 										  Notification notif = new Notification(R.drawable.ac_blue_side,

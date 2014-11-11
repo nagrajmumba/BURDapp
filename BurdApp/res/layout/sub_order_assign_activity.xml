@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:baselineAligned="false"
+    android:orientation="vertical" >
+ <LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:baselineAligned="false"
     android:orientation="vertical" >
 
@@ -9,6 +14,7 @@
         android:id="@+id/textView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
         android:text="@string/order_name"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -16,19 +22,34 @@
         android:id="@+id/txtordername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/order_id"
+        android:text="@string/order_name"
         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/blue_line"
+        android:height="2dp"
+        android:textSize="14sp" />
 
     <ExpandableListView
         android:id="@+id/expandableListView1"
         android:layout_width="match_parent"
-        android:layout_height="303dp"
-        android:layout_weight="0.46" >
+        android:layout_height="330dp" >
 
     </ExpandableListView>
-	<RelativeLayout
+
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:background="@drawable/blue_line"
+        android:height="2dp"
+        android:textSize="14sp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp" >
 
         <TextView
             android:id="@+id/orderQuantityTxt"
@@ -49,7 +70,6 @@
             android:layout_marginRight="29dp"
             android:text="Medium Text"
             android:textAppearance="?android:attr/textAppearanceMedium" />
-
     </RelativeLayout>
 
     <RelativeLayout
@@ -65,7 +85,8 @@
             android:layout_marginLeft="15dp"
             android:text="@string/quantity_left"
             android:textAppearance="?android:attr/textAppearanceMedium" />
-         <TextView
+
+        <TextView
             android:id="@+id/quantityLeft"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -74,8 +95,8 @@
             android:layout_marginRight="29dp"
             android:text="Medium Text"
             android:textAppearance="?android:attr/textAppearanceMedium" />
-
     </RelativeLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
@@ -99,8 +120,8 @@
             android:layout_marginRight="29dp"
             android:text="Medium Text"
             android:textAppearance="?android:attr/textAppearanceMedium" />
-
     </RelativeLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
@@ -119,3 +140,4 @@
     </LinearLayout>
 
 </LinearLayout>
+</ScrollView>

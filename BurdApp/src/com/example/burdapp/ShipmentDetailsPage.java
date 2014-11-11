@@ -59,7 +59,7 @@ public class ShipmentDetailsPage extends Activity{
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
 					if(tvSentDate.getText().length()>0 && tvApproxDelDate.getText().length()>0){
-						db.updateOrderShipment(order_id,tvSentDate.toString(),tvApproxDelDate.toString());
+						db.updateOrderShipment(order_id,tvSentDate.getText().toString(),tvApproxDelDate.getText().toString());
 						db.updateOrderStatus("5", order_id);
 						finish();
 						Bundle b = new Bundle();
@@ -70,11 +70,11 @@ public class ShipmentDetailsPage extends Activity{
 					}else{
 						if(tvSentDate.getText().length()<=0){
 							tvSentDate.setError("error");
-							Toast.makeText(getApplicationContext(), "Bhejne ki tareek chune", Toast.LENGTH_SHORT).show();
+							Toast.makeText(getApplicationContext(), getString(R.string.select_sent_date), Toast.LENGTH_SHORT).show();
 						}
 						if(tvApproxDelDate.getText().length()<=0){
 							tvSentDate.setError("error");
-							Toast.makeText(getApplicationContext(), "pahunch ki tareek chune", Toast.LENGTH_SHORT).show();
+							Toast.makeText(getApplicationContext(), getString(R.string.select_reaching_date), Toast.LENGTH_SHORT).show();
 						}
 					}
 				}
@@ -101,7 +101,7 @@ public class ShipmentDetailsPage extends Activity{
 			});
 		}else if(order_status.equals("5")){
 			TextView heading = (TextView) findViewById(R.id.statusText);
-			heading.setText("Order has been closed");
+			heading.setText(getString(R.string.order_is_closed));
 		}
 		
 	}

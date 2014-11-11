@@ -222,8 +222,8 @@ public class AssignFarmers extends Activity {
 				//final String item = (String) AdptView.getItemAtPosition(position);
 				final String id1 = list_ids.get(position);
 				final String mobile = list_mobile.get(position);
-				System.out.println("this is mob no. "+list_mobile);
-				Toast.makeText(getApplicationContext(), mobile+"--"+ id1 , Toast.LENGTH_SHORT).show();
+				//System.out.println("this is mob no. "+list_mobile);
+				//Toast.makeText(getApplicationContext(), mobile+"--"+ id1 , Toast.LENGTH_SHORT).show();
 				/*Bundle b = new Bundle();
 	   	    	b.putString(applicationConstants.ORDER_ID,list_ids.get(position));
 	   	    	Intent in = null;*/
