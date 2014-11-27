@@ -229,6 +229,99 @@ public class Database {
 		return dataArrays;
 	}
 	
+	/* get all the farmers*/
+	public ArrayList<ArrayList<Object>> getAllFarmersAsArraysByType(String order_type)
+	{
+		
+		ArrayList<ArrayList<Object>> dataArrays = new ArrayList<ArrayList<Object>>();
+ 
+		Cursor cursor=null;
+		String whereclause="";
+		if(order_type.equals("1")){
+			whereclause = applicationConstants.FARMER_KERNEL+"!= '0'";
+		}else if(order_type.equals("2")){
+			whereclause = applicationConstants.FARMER_SEED+"!= '0'";
+		}else if(order_type.equals("3")){
+			whereclause = applicationConstants.FARMER_FRUIT+"!= '0'";
+		}else if(order_type.equals("4")){
+			whereclause = applicationConstants.FARMER_PULP+"!= '0'";
+		}else{
+			whereclause = "null";
+		}
+		try
+		{
+			
+			cursor = db.query(
+					applicationConstants.FARMER_TABLE,
+					new String[]{applicationConstants.FARMER_NAME,applicationConstants.FARMER_SEED,
+							applicationConstants.FARMER_KERNEL,applicationConstants.FARMER_FRUIT,
+							applicationConstants.FARMER_CREATED_ON,applicationConstants.FARMER_ID,
+							applicationConstants.FARMER_MOBILE,applicationConstants.FARMER_ADDRESS,
+							applicationConstants.FARMER_PULP,applicationConstants.FARMER_OCCUPIED_KERNEL,
+							applicationConstants.FARMER_OCCUPIED_SEED,applicationConstants.FARMER_OCCUPIED_FRUIT,
+							applicationConstants.FARMER_OCCUPIED_PULP},
+							whereclause, null, null, null, applicationConstants.FARMER_NAME
+			);
+ 
+			System.out.println(cursor.getColumnNames());
+			
+ 
+			if (cursor != null && cursor.moveToFirst())
+			{
+				do
+				{
+					ArrayList<Object> dataList = new ArrayList<Object>();
+ 
+					dataList.add(cursor.getString(0));
+					//Log.v("name", cursor.getString(0));
+					dataList.add(cursor.getString(1));
+					//Log.v("seed", cursor.getString(1));
+					dataList.add(cursor.getString(2));
+					//Log.v("kernel", cursor.getString(2));
+					dataList.add(cursor.getString(3));
+					//Log.v("fruit", cursor.getString(3));
+					dataList.add(cursor.getString(4));
+					//Log.v("created on", cursor.getString(4));
+					dataList.add(cursor.getString(5));
+					//Log.v("mobile", cursor.getString(5));
+					dataList.add(cursor.getString(6));
+					//Log.v("address", cursor.getString(6));	
+					dataList.add(cursor.getString(7));
+					//Log.v("address", cursor.getString(6));
+					dataList.add(cursor.getString(8));
+					//Log.v("address", cursor.getString(6));
+					dataList.add(cursor.getString(9));
+					//Log.v("address", cursor.getString(6));
+					dataList.add(cursor.getString(10));
+					//Log.v("address", cursor.getString(6));
+					dataList.add(cursor.getString(11));
+					//Log.v("address", cursor.getString(6));
+					dataList.add(cursor.getString(12));
+					//Log.v("address", cursor.getString(6));
+					
+					
+					
+					
+					dataArrays.add(dataList);
+				}
+				// move the cursor's pointer up one position.
+				while (cursor.moveToNext());
+			}else{
+				return null;
+			}
+			
+		}
+		catch (SQLException e)
+		{
+			Log.e("DB Error", e.toString());
+			e.printStackTrace();
+		}
+ 
+		// return the ArrayList that holds the data collected from
+		// the database.
+		return dataArrays;
+	}
+	
 	public ArrayList<ArrayList<Object>> getFarmerHistory(String f_id)
 	{
 		

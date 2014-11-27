@@ -70,7 +70,7 @@ public class AssignFarmers extends Activity {
 		order_qty = (String) o_Details.get(3);
 	    ArrayList<ArrayList<Object>> array_list = null;	    
 	    
-	    	array_list = db.getAllFarmersAsArrays();
+	    	array_list = db.getAllFarmersAsArraysByType(type);
 	    	if(array_list!=null){
 	    	System.out.println("array list:" + array_list);
 	    	ArrayList<ArrayList<Object>> array_forder_farmer_id_list = null;

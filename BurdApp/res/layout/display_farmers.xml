@@ -2,12 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" 
     android:background="@drawable/white_strip"
-    
-    >
-
-    
+    android:orientation="vertical" >
             
    	                 <!-- THE FARMERS DATA TABLE -->
    	<ScrollView 
@@ -42,16 +38,16 @@
         android:layout_gravity="center_horizontal">
 
        <Button
-             android:id="@+id/register_button"
-            android:layout_width="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"           
-            android:textSize="21sp"
-            android:text="@string/farmer_registration"
-            android:layout_height="wrap_content"
-            android:background="@drawable/registration"
-            android:textColor="#ffffff"           
-            />
+           android:id="@+id/register_button"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_gravity="center"
+           android:background="@drawable/registration"
+           android:gravity="center"
+           android:text="@string/farmer_registration"
+           android:textColor="#ffffff"
+           android:textSize="21sp" />
+
        <!-- android:onClick="farmerRegistration"  -->
         </LinearLayout>
    	

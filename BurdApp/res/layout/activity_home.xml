@@ -5,7 +5,11 @@
     android:layout_height="fill_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical" >
-
+	<TextView
+        
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="" />
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -15,15 +19,14 @@
             android:id="@+id/order_button" 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" 
-            android:text="@string/list_of_orders"/>
+            android:text="@string/list_of_orders"
+            android:textSize="21sp"
+            android:background="@drawable/blue_background_btn"
+            android:textColor="#ffffff"  
+            />
         
         
     </LinearLayout>
-   <TextView
-        android:id="@+id/space"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="" /> 
    
    <TextView
         android:id="@+id/space1"
@@ -41,7 +44,11 @@
             android:id="@+id/farmer_button" 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" 
-            android:text="@string/list_of_farmers"/>
+            android:text="@string/list_of_farmers"
+            android:textSize="21sp"
+            android:background="@drawable/blue_background_btn"
+            android:textColor="#ffffff" 
+            />
         
         
     </LinearLayout>
@@ -59,7 +66,11 @@
             android:id="@+id/sync_button" 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" 
-            android:text="upsync"/>
+            android:text="upsync"
+            android:textSize="21sp"
+            android:background="@drawable/blue_background_btn"
+            android:textColor="#ffffff" 
+            />
         
         
     </LinearLayout> 
