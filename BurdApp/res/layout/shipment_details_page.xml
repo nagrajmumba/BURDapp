@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-
     <TextView
         android:id="@+id/textView1"
         android:layout_width="match_parent"
@@ -94,9 +93,8 @@
              <Button 
                  android:id="@+id/btn_approximate_delivery_date"
                  android:background="@drawable/calendar"
-                 
                  android:layout_width="32dip"
-            android:layout_height="32dip"/>
+                 android:layout_height="32dip"/>
             
             </LinearLayout>
 

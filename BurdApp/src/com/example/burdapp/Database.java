@@ -816,6 +816,65 @@ public class Database {
 		return cursor.getString(0);
 		
 	}
+	
+	public ArrayList<Object> getTotalOfClosedOrder(String order_id){
+		ArrayList<Object> rowArray = new ArrayList<Object>();
+		Cursor cursor = null;
+		  	cursor=db.rawQuery("SELECT "+ applicationConstants.ORDER_PRICE+ " As totPrice," +
+		  			"SUM(CAST("+ applicationConstants.FORDER_QUANTITY+ " AS UNSIGNED)) As totQty," +
+		  			" "+ applicationConstants.ORDER_TRANSPORTATION_COST+ " As totTravel" +
+		  			" FROM "+applicationConstants.ORDER_TABLE+","+applicationConstants.FARMER_ORDER_TABLE+"  where "+ 
+		  			applicationConstants.ORDER_ID+"='"+order_id+"' and "+applicationConstants.FORDER_ORDER_ID+"="+applicationConstants.ORDER_ID,null);
+		/*cursor=db.rawQuery("SELECT "+ applicationConstants.ORDER_PRICE+ " As totPrice," +
+		  			"SUM(CAST("+ applicationConstants.FORDER_QUANTITY+ " AS UNSIGNED)) As totQty," +
+		  			" "+ applicationConstants.ORDER_TRANSPORTATION_COST+ " As totTravel" +
+		  			" FROM "+applicationConstants.FARMER_ORDER_TABLE+", "+applicationConstants.ORDER_TABLE+"  where "+ 
+		  			applicationConstants.ORDER_ID+"='"+order_id+"' and "+applicationConstants.FORDER_ID+" ='"+order_id+"'",null);*/
+		
+		if(cursor.moveToFirst()){
+			rowArray.add(cursor.getString(0));
+			rowArray.add(cursor.getString(1));
+			rowArray.add(cursor.getString(2));
+		}
+		//System.out.println(cursor.getColumnName(0)+": this is sum of avail qty"+cursor.getCount()+ cursor.getDouble(0));
+		
+		return rowArray;
+		
+	}
+	
+	public ArrayList<ArrayList<Object>> getFarmerDetailsOfClosedOrder(String order_id){
+		ArrayList<ArrayList<Object>> rowArray = new ArrayList<ArrayList<Object>>();
+		Cursor cursor = null;
+		  	cursor=db.rawQuery("SELECT "+ applicationConstants.FORDER_ID+","+
+		  									applicationConstants.FORDER_FARMER_ID+","+
+		  									applicationConstants.FARMER_NAME+","+
+		  									applicationConstants.FARMER_MOBILE+","+
+		  									applicationConstants.FORDER_QUANTITY+","+
+		  									applicationConstants.FORDER_PRICE+","+
+		  									applicationConstants.FORDER_TRAVEL_COST+		 									
+		  			" FROM "+applicationConstants.FARMER_ORDER_TABLE+","+applicationConstants.FARMER_TABLE+"  where "+ 
+		  			applicationConstants.FORDER_ORDER_ID+"='"+order_id+"' and "+applicationConstants.FORDER_FARMER_ID+"="+applicationConstants.FARMER_ID,null);
+		  	
+		  	cursor.moveToFirst();
+		if(!cursor.isAfterLast()){
+			do{
+				ArrayList<Object> dataList = new ArrayList<Object>();
+				dataList.add(cursor.getString(0));
+				dataList.add(cursor.getString(1));
+				dataList.add(cursor.getString(2));
+				dataList.add(cursor.getString(3));
+				dataList.add(cursor.getString(4));
+				dataList.add(cursor.getString(5));
+				dataList.add(cursor.getString(6));
+				//System.out.println("hell"+cursor.getString(0)+":"+cursor.getString(1)+":"+cursor.getString(2)+":");
+			rowArray.add(dataList);
+			}while(cursor.moveToNext());
+		}
+		
+		
+		return rowArray;
+		
+	}
 	public void removeUnwantedOrders(ArrayList<String> id_list){
 		Cursor cursor = null;
 		cursor=db.rawQuery("SELECT "+applicationConstants.ORDER_ID+" FROM "+applicationConstants.ORDER_TABLE+" where "+applicationConstants.ORDER_NEW+"='1'",null);

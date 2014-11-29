@@ -118,6 +118,7 @@
 	<string name="sub_order_not_completed">पक्का नहीं हुआ है !</string>
 	<string name="sub_order_confirmed">पक्का हो गया है !</string>
 	<string name="sub_order_received">प्राप्त हो चुका है !</string>
+	<string name="towards">को दी जानेवाली रक्कम</string>
 	
 	<!-- HomeActivity.java -->	
     <string-array name="month_array">

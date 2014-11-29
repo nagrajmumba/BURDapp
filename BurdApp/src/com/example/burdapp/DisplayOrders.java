@@ -40,18 +40,30 @@ public class DisplayOrders extends Activity {
 	Database db;
 	int flag ;
 	String m_id;
-	
+	//--variable for notification manager----///
+			//Notification message ID
+			 private static final int NOTIFY_ME_ID=1337;
+			
+			//Create NotificationManager  object
+			 private NotificationManager notifyMgr=null;
+			 
+			public void clearNotification(View v) {
+				 //Clear the notification 
+				notifyMgr.cancel(NOTIFY_ME_ID);
+			}
 	
 	@Override
 	  protected void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.activity_display_orders);
-	   
+	   //notifyMgr.cancel(NOTIFY_ME_ID);
 	    db = new Database(this);
 	    prgDialog = new ProgressDialog(this);
 	    prgDialog.setMessage(getString(R.string.please_wait));
 	    prgDialog.setCancelable(false);
 	    flag=0;
+	        
+	    
 	    ArrayList<ArrayList<Object>> array_list = null;	    
 	    //db.updateFarmerOrderSynched();
 	    	array_list = db.getAllOrdersAsArrays();
@@ -117,7 +129,7 @@ public class DisplayOrders extends Activity {
    	    		in.putExtras(b);
    	   	    	startActivity(in);	
    	    	}else if(status.equals("5")){
-   	    		in = new Intent(getApplicationContext(), ShipmentDetailsPage.class);
+   	    		in = new Intent(getApplicationContext(), PaymentDetails.class);
    	    		in.putExtras(b);
    	   	    	startActivity(in);	
    	    	}

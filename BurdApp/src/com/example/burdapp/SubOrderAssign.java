@@ -18,7 +18,7 @@ import android.widget.TextView;
 public class SubOrderAssign extends Activity {
 	
 	ExpandableListView exV;	
-	String order_id,type,order_price,order_qty,order_deldate,order_travel_cost,order_name;
+	String order_id,type,order_price,order_qty,order_deldate,order_travel_cost,order_name,order_status;
 	ProgressDialog prgDialog;
 	TextView txtordername, txtleftqty, txtselectedqty, txtorderqty;
 	Button btnNext;
@@ -56,7 +56,7 @@ public class SubOrderAssign extends Activity {
 		order_deldate = (String) o_Details.get(7);
 		order_travel_cost = (String) o_Details.get(5);
 		order_name = (String) o_Details.get(1);
-		
+		order_status = (String) o_Details.get(9);
 		ArrayList<ArrayList<Object>> array_list = null;
     	array_list = db.getFarmersOfOrder(order_id);    	
     	
@@ -138,9 +138,11 @@ public class SubOrderAssign extends Activity {
 				db.updateOrderStatus("4", order_id);
     	    	Bundle b = new Bundle();
 	   	    	b.putString(applicationConstants.ORDER_ID,order_id);
+	   	    	
 	   	    	Intent in = new Intent(getApplicationContext(), ShipmentDetailsPage.class);			   	    	
 	   	    	in.putExtras(b);
 	   	    	startActivity(in);
+	   	    	
 			}
 		});
 		

@@ -64,7 +64,7 @@ public class ShipmentDetailsPage extends Activity{
 						finish();
 						Bundle b = new Bundle();
 			   	    	b.putString(applicationConstants.ORDER_ID,order_id);
-			   	    	Intent in = new Intent(getApplicationContext(), ShipmentDetailsPage.class);			   	    	
+			   	    	Intent in = new Intent(getApplicationContext(), PaymentDetails.class);			   	    	
 			   	    	in.putExtras(b);
 			   	    	startActivity(in);
 					}else{
@@ -101,7 +101,20 @@ public class ShipmentDetailsPage extends Activity{
 			});
 		}else if(order_status.equals("5")){
 			TextView heading = (TextView) findViewById(R.id.statusText);
-			heading.setText(getString(R.string.order_is_closed));
+			TextView title = (TextView) findViewById(R.id.textView1);
+			//heading.setText(getString(R.string.order_is_closed));
+			ArrayList<Object> values =  db.getTotalOfClosedOrder(order_id);
+			ArrayList<ArrayList<Object>> farmerDetails = db.getFarmerDetailsOfClosedOrder(order_id);
+			String details="";
+			
+			for(int i=0;i<farmerDetails.size();i++)
+			{
+				details+="farmerName:"+farmerDetails.get(0).get(2);
+			}
+			//System.out.println(details+"hiiii"+farmerDetails.size());
+			title.setText(details);
+			heading.setText(getString(R.string.order_is_closed)+" Price:"+values.get(0)+" qty:"+ values.get(1)+" t_cost:"+values.get(2));
+			
 		}
 		
 	}
